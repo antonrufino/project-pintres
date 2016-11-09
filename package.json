@@ -1,0 +1,19 @@
+{
+  "name": "project-pintres",
+  "version": "1.0.0",
+  "description": "CMSC 100 is <3",
+  "main": "backend/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonrufino/project-pintres.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonrufino/project-pintres/issues"
+  },
+  "homepage": "https://github.com/antonrufino/project-pintres#readme"
+}

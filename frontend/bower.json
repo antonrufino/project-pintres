@@ -1,0 +1,18 @@
+{
+  "name": "project-pintres",
+  "homepage": "https://github.com/antonrufino/project-pintres",
+  "authors": [
+    "Anton Rufino <anton.vongola@gmail.com>"
+  ],
+  "description": "CMSC 100 is <3",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
