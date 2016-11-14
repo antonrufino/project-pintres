@@ -21,3 +21,7 @@ main {
 .card-container {
     padding: 20px;
 }
+
+.topic-chip {
+    color: white;
+}
