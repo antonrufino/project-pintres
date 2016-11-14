@@ -2,10 +2,12 @@
 
 let express = require('express');
 let bodyParser = require('body-parser');
+let path = require('path');
 
 let app = express();
 
 app.use(require('method-override')());
+app.use('/', express.static(path.join(__dirname + '/../frontend')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(require(__dirname + '/router')(express.Router()));

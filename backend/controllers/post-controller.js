@@ -26,6 +26,17 @@ exports.getPost = (req, res) => {
     });
 }
 
+exports.getAllPosts = (req, res) => {
+    let query = 'SELECT * FROM posts';
+    connection.query(query, [], (err, rows) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
+}
+
 exports.addPost = (req, res) => {
     let query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, NOW(), ?, ?);'
 
