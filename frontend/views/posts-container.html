@@ -6,7 +6,8 @@
                     <span class="card-title">{{post.author_display_name}}</span>
                     <span>(@{{post.author_username}})</span>
                     <p>
-                        <span class="red-text darken-2 date-text">{{post.post_time | date:"MMM d, yyyy h:mma"}}</span>
+                        <span class="red-text darken-2 date-text">
+                            {{post.post_time | date:"MMM d, yyyy h:mma"}}</span>
                         <br />
                         <br />
                         {{post.content}}
@@ -19,8 +20,9 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-action-btn horizontal click-to-toggle">
-            <a class="btn-floating red darken-2 btn-large">
+        <div class="fixed-action-btn">
+            <a class="btn-floating red darken-2 btn-large modal-trigger"
+                href="#new-post-modal">
                 <i class="material-icons">mode_edit</i>
             </a>
         </div>

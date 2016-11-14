@@ -12,5 +12,11 @@
                 templateUrl: 'views/posts-container.html',
                 controller: 'PostCtrl'
             }
+        }).directive('pinNewPost', () => {
+            return {
+                restrict: 'E',
+                templateUrl: 'views/new-post.html',
+                controller: 'PostCtrl'
+            }
         });
 })();
