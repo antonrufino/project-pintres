@@ -24,7 +24,7 @@
                             $scope.posts = response.data;
                         },
                         (response) => {
-                            console.log(response.statusText);
+                            Materialize.toast('Cannot load posts.', 3000);
                         });
                 };
 
@@ -50,7 +50,7 @@
                             topic: ''
                         };
                     }, (response) => {
-                        Materialize.toast('Post failed.', 3000);
+                        Materialize.toast('Oops! Something went wrong.', 3000);
                         $scope.post = {
                             author_display_name: '',
                             author_username: '',
@@ -74,7 +74,7 @@
                             }
                         }
                     }, (response) => {
-                        Materialize.toast('An error occured', 3000);
+                        Materialize.toast('Oops! Something went wrong.', 3000);
                     });
                 };
 
@@ -103,7 +103,7 @@
                             topic: ''
                         };
                     }), (response) => {
-                        Materialize.toast('An error occured', 3000);
+                        Materialize.toast('Oops! Something went wrong.', 3000);
                         $scope.post = {
                             author_display_name: '',
                             author_username: '',
