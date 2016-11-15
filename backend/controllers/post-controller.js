@@ -58,12 +58,30 @@ exports.addPost = (req, res) => {
     });
 }
 
-exports.deletePost = (req ,res) => {
+exports.deletePost = (req, res) => {
     let query = 'DELETE FROM posts WHERE id = ?';
 
     connection.query(query, [req.body.id], (err, rows) => {
         if (err) {
             res.status(400).send(rows);
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
+}
+
+exports.editPost = (req, res) => {
+    let query = 'UPDATE posts SET content = ?, topic = ? WHERE id = ?';
+
+    connection.query(query, [
+        req.body.content,
+        req.body.topic,
+        req.body.id
+    ], (err, rows) => {
+        if (err) {
+            res.status(400).send(rows);
+            console.log(err);
         } else {
             res.send(rows);
         }

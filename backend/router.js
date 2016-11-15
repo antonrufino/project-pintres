@@ -5,6 +5,7 @@ module.exports = (router) => {
     router.get('/api/post', postController.getAllPosts)
     router.get('/api/post/:id', postController.getPost);
     router.post('/api/post/remove', postController.deletePost);
+    router.post('/api/post/edit', postController.editPost);
 
     return router;
 }
