@@ -40,7 +40,7 @@ exports.getAllPosts = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    let query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, ?, ?, ?);'
+    let query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, STR_TO_DATE(?, \'%Y-%m-%d %T\'), ?, ?);'
 
     connection.query(query, [
         req.body.author_username,
