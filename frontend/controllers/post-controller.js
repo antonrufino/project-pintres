@@ -12,6 +12,12 @@
                 };
                 $scope.posts = [];
 
+                this.pendingId;
+
+                $scope.setPending = (pendingId) => {
+                    this.pendingId = pendingId;
+                }
+
                 $scope.loadPosts = () => {
                     $http.get('/api/post')
                         .then((response) => {
@@ -55,8 +61,8 @@
                     });
                 };
 
-                $scope.deletePost = (postId) => {
-                    $http.post('/api/post/remove', {id: postId})
+                $scope.deletePost = () => {
+                    $http.post('/api/post/remove', {id: this.pendingId})
                     .then((response) => {
                         Materialize.toast('Post deleted.', 3000);
                     }), (response => {

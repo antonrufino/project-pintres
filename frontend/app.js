@@ -12,11 +12,19 @@
                 templateUrl: 'views/posts-container.html',
                 controller: 'PostCtrl'
             }
-        }).directive('pinNewPost', () => {
+        })
+        .directive('pinNewPost', () => {
             return {
                 restrict: 'E',
                 templateUrl: 'views/new-post.html',
                 controller: 'PostCtrl'
             }
+        })
+        .directive('pinDeletePost', () => {
+            return {
+                restrict: 'E',
+                templateUrl: 'views/delete-post.html',
+                controller: 'PostCtrl'
+            };
         });
 })();
