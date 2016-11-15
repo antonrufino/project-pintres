@@ -22,13 +22,15 @@
                 };
 
                 $scope.createPost = () => {
-                    $scope.post.post_time = Date.now();
+                    let post = Object.assign({}, $scope.post);
+                    $scope.post.post_time = new Date();
+                    post.post_time = $scope.post.post_time
+                        .toISOString().slice(0, 19).replace('T', ' ');
 
-                    $http.post('/api/post', $scope.post)
+                    $http.post('/api/post', post)
                     .then((reponse) => {
-                        let post = Object.assign({}, $scope.post);
-
                         Materialize.toast('Posted!', 3000);
+                        post.post_time = $scope.post.post_time;
                         $scope.posts.push(post);
 
                         $scope.post = {
