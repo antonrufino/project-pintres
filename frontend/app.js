@@ -26,5 +26,12 @@
                 templateUrl: 'views/delete-post.html',
                 controller: 'PostCtrl'
             };
+        })
+        .directive('pinEditPost', () => {
+            return {
+                restrict: 'E',
+                templateUrl: 'views/edit-post.html',
+                controller: 'PostCtrl'
+            };
         });
 })();
