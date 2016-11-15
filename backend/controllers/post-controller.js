@@ -57,3 +57,15 @@ exports.addPost = (req, res) => {
         }
     });
 }
+
+exports.deletePost = (req ,res) => {
+    let query = 'DELETE FROM posts WHERE id = ?';
+
+    connection.query(query, [req.body.id], (err, rows) => {
+        if (err) {
+            res.status(400).send(rows);
+        } else {
+            res.send(rows);
+        }
+    });
+}

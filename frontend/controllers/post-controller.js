@@ -3,6 +3,7 @@
         .controller('PostCtrl', ['$scope', '$http',
             ($scope, $http) => {
                 $scope.post = {
+                    id: '',
                     author_display_name: '',
                     author_username: '',
                     post_time: '',
@@ -28,10 +29,12 @@
                         .toISOString().slice(0, 19).replace('T', ' ');
 
                     $http.post('/api/post', post)
-                    .then((reponse) => {
+                    .then((response) => {
                         Materialize.toast('Posted!', 3000);
                         post.post_time = $scope.post.post_time;
+                        post.id = response.data.insertId;
                         $scope.posts.push(post);
+                        console.log(post);
 
                         $scope.post = {
                             author_display_name: '',
@@ -49,6 +52,15 @@
                             content: '',
                             topic: ''
                         };
+                    });
+                };
+
+                $scope.deletePost = (postId) => {
+                    $http.post('/api/post/remove', {id: postId})
+                    .then((response) => {
+                        Materialize.toast('Post deleted.', 3000);
+                    }), (response => {
+                        Materialize.toast('An error occured', 3000);
                     });
                 };
             }
