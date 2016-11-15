@@ -1,0 +1,39 @@
+<div id="new-post-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>New Post</h4>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" class="validate" id="display_name"
+                            ng-model="post.author_display_name" />
+                        <label for="display_name">Display name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="text" class="validate" id="username"
+                            ng-model="post.author_username" />
+                        <label for="username">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea"
+                            ng-model="post.content"></textarea>
+                        <label for="textarea1">Post</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" class="validate" id="topic"
+                            ng-model="post.topic" />
+                        <label for="topic">Topic</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class=" modal-action modal-close btn-flat" ng-click="createPost()">Post</a>
+        <a href="#" class=" modal-action modal-close btn-flat">Cancel</a>
+    </div>
+</div>

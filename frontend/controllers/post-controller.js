@@ -2,8 +2,6 @@
     angular.module('app')
         .controller('PostCtrl', ['$scope', '$http',
             ($scope, $http) => {
-                $('.modal').modal();
-
                 $scope.post = {
                     author_display_name: '',
                     author_username: '',
