@@ -12,8 +12,7 @@ app.use('/', express.static(path.join(__dirname + '/../frontend')));
 app.use(cookieSession({secret: 'p1ntr3s'}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(require(__dirname + '/routes/post-routes')(express.Router()));
-app.use(require(__dirname + '/routes/auth-routes')(express.Router()));
+app.use(require(__dirname + '/router')(express.Router()));
 
 app.listen(8000);
 console.log('Running at localhost:8000');
