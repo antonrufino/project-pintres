@@ -1,10 +1,10 @@
 'use strict';
 
-let express = require('express');
-let bodyParser = require('body-parser');
-let path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-let app = express();
+const app = express();
 
 app.use(require('method-override')());
 app.use('/', express.static(path.join(__dirname + '/../frontend')));

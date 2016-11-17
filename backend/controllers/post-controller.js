@@ -1,6 +1,6 @@
-let mysql = require('mysql');
+const mysql = require('mysql');
 
-let connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
@@ -16,7 +16,7 @@ connection.connect((err) => {
 });
 
 exports.getPost = (req, res) => {
-    let query = 'SELECT * FROM posts WHERE id = ?;'
+    const query = 'SELECT * FROM posts WHERE id = ?;'
     connection.query(query, [req.params.id], (err, rows) => {
         if (err) {
             res.status(400).send(rows);
@@ -28,7 +28,7 @@ exports.getPost = (req, res) => {
 }
 
 exports.getAllPosts = (req, res) => {
-    let query = 'SELECT * FROM posts';
+    const query = 'SELECT * FROM posts';
     connection.query(query, [], (err, rows) => {
         if (err) {
             res.status(400).send(rows);
@@ -40,7 +40,7 @@ exports.getAllPosts = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    let query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, STR_TO_DATE(?, \'%Y-%m-%d %T\'), ?, ?);'
+    const query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, STR_TO_DATE(?, \'%Y-%m-%d %T\'), ?, ?);'
 
     connection.query(query, [
         req.body.author_username,
@@ -59,7 +59,7 @@ exports.addPost = (req, res) => {
 }
 
 exports.deletePost = (req, res) => {
-    let query = 'DELETE FROM posts WHERE id = ?';
+    const query = 'DELETE FROM posts WHERE id = ?';
 
     connection.query(query, [req.body.id], (err, rows) => {
         if (err) {
@@ -72,7 +72,7 @@ exports.deletePost = (req, res) => {
 }
 
 exports.editPost = (req, res) => {
-    let query = 'UPDATE posts SET content = ?, topic = ? WHERE id = ?';
+    const query = 'UPDATE posts SET content = ?, topic = ? WHERE id = ?';
 
     connection.query(query, [
         req.body.content,

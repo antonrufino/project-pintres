@@ -1,4 +1,4 @@
-let postController = require(__dirname + '/../controllers/post-controller');
+const postController = require(__dirname + '/../controllers/post-controller');
 
 module.exports = (router) => {
     router.post('/api/post', postController.addPost);
