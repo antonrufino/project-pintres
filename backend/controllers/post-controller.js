@@ -19,7 +19,7 @@ exports.getPost = (req, res) => {
     const query = 'SELECT * FROM posts WHERE id = ?;'
     connection.query(query, [req.params.id], (err, rows) => {
         if (err) {
-            res.status(400).send(rows);
+            res.status(400).send(err);
             console.log(err);
         } else {
             res.send(rows);
@@ -31,7 +31,7 @@ exports.getAllPosts = (req, res) => {
     const query = 'SELECT * FROM posts';
     connection.query(query, [], (err, rows) => {
         if (err) {
-            res.status(400).send(rows);
+            res.status(400).send(err);
             console.log(err);
         } else {
             res.send(rows);
@@ -50,7 +50,7 @@ exports.addPost = (req, res) => {
         req.body.topic
     ], (err, rows) => {
         if (err) {
-            res.status(400).send(rows);
+            res.status(400).send(err);
             console.log(err);
         } else {
             res.send(rows);
@@ -63,7 +63,7 @@ exports.deletePost = (req, res) => {
 
     connection.query(query, [req.body.id], (err, rows) => {
         if (err) {
-            res.status(400).send(rows);
+            res.status(400).send(err);
             console.log(err);
         } else {
             res.send(rows);
@@ -80,7 +80,7 @@ exports.editPost = (req, res) => {
         req.body.id
     ], (err, rows) => {
         if (err) {
-            res.status(400).send(rows);
+            res.status(400).send(err);
             console.log(err);
         } else {
             res.send(rows);
