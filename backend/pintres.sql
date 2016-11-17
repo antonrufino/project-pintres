@@ -20,10 +20,10 @@ CREATE TABLE users(
 );
 
 INSERT INTO users(username, display_name, password)
-VALUES('antonrufino', 'Anton Rufino', PASSWORD('whatpassword'));
+VALUES(PASSWORD('antonrufino'), 'Anton Rufino', PASSWORD('whatpassword'));
 
 INSERT INTO users(username, display_name, password)
-VALUES('czesyeban', 'Czes Yeban', PASSWORD('frontendisheart'));
+VALUES(PASSWORD('czesyeban'), 'Czes Yeban', PASSWORD('frontendisheart'));
 
 INSERT INTO users(username, display_name, password)
-VALUES('mariqueentenedero', 'Mariqueen Tenedero', PASSWORD('loginisheart'));
+VALUES(PASSWORD('mariqueentenedero'), 'Mariqueen Tenedero', PASSWORD('loginisheart'));
