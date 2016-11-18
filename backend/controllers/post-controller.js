@@ -1,19 +1,4 @@
-const mysql = require('mysql');
-
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'pintres'
-});
-
-connection.connect((err) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('Database is connected.');
-    }
-});
+const connection = require(__dirname + '/../db');
 
 exports.getPost = (req, res) => {
     const query = 'SELECT * FROM posts WHERE id = ?;'
