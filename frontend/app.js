@@ -3,8 +3,8 @@
     .directive('pinSidebar', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/sidebar.html'
-            controller: 'SidebarCtrl';
+            templateUrl: 'views/sidebar.html',
+            controller: 'SidebarCtrl'
         };
     })
     .directive('pinPostsContainer', () => {
