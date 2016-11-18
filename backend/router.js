@@ -4,6 +4,7 @@ const authController = require(__dirname + '/controllers/auth-controller.js');
 module.exports = (router) => {
     router.post('/api/login', authController.login);
     router.get('/api/login', authController.logintest);
+    router.get('/api/logout', authController.logout);
 
     router.post('/api/post', postController.addPost);
     router.get('/api/post', postController.getAllPosts)

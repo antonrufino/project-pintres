@@ -30,8 +30,13 @@ exports.logintest = (req, res) => {
 
     req.session.user = {
         username: 'antonrufino',
-        password: 'whatpassword'
+        display_name: 'Anton Rufino'
     }
 
     res.redirect('/index.html');
+}
+
+exports.logout = (req, res) => {
+    req.session = null;
+    res.send('logout successful.');
 }
