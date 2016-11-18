@@ -13,9 +13,12 @@ exports.login = (req, res) => {
             res.send(rows);
         } else {
             if (rows.length > 0) {
-                req.session.username = rows[0].username;
-                req.session.display_name = rows[0].display_name;
-                res.send({success: true});
+                req.session.user = {
+                    username: req.body.username,
+                    display_name: rows[0].display_name
+                };
+
+                res.redirect('/')
             } else {
                 res.send({success: false});
             }
@@ -38,5 +41,5 @@ exports.logintest = (req, res) => {
 
 exports.logout = (req, res) => {
     req.session = null;
-    res.send('logout successful.');
+    res.redirect('/login.html');
 }

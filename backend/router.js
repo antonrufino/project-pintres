@@ -12,5 +12,9 @@ module.exports = (router) => {
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 
+    router.all('*', (req, res) => {
+        res.redirect(404, '/404.html');
+    });
+
     return router;
 }

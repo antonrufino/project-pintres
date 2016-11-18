@@ -24,8 +24,8 @@ app.use((req, res, next) => {
         next();
     }
 })
-app.use(require(__dirname + '/router')(express.Router()));
 app.use('/', express.static(path.join(__dirname + '/../frontend')));
+app.use(require(__dirname + '/router')(express.Router()));
 
 app.listen(8000);
 console.log('Running at localhost:8000');
