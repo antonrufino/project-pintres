@@ -1,6 +1,8 @@
 (() => {
     angular.module('app')
-    .controller('SidebarCtrl', ['$scope', '$http', ($scope, $http) => {
+    .controller('SidebarCtrl', ['$scope', '$http', sidebarController]);
+
+    function sidebarController($scope, $http) {
         $scope.user = {
             username: '',
             display_name: ''
@@ -16,5 +18,5 @@
                 Materialize.toast('Oops! Something went wrong.', 3000);
             });
         };
-    }]);
+    }
 })();

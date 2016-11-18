@@ -28,8 +28,8 @@ exports.addPost = (req, res) => {
     const query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, STR_TO_DATE(?, \'%Y-%m-%d %T\'), ?, ?);'
 
     connection.query(query, [
-        req.body.author_username,
-        req.body.author_display_name,
+        req.session.user.username,
+        req.session.user.display_name,
         req.body.post_time,
         req.body.content,
         req.body.topic
