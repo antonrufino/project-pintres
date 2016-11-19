@@ -13,7 +13,9 @@ exports.getPost = (req, res) => {
 }
 
 exports.getAllPosts = (req, res) => {
-    const query = 'SELECT * FROM posts';
+    const query = 'SELECT posts.id, posts.author_username, users.display_name \
+        as author_display_name, posts.post_time, posts.content, posts.topic \
+        FROM posts JOIN users ON users.username = posts.author_username;';
     connection.query(query, [], (err, rows) => {
         if (err) {
             res.status(400).send(err);
@@ -25,13 +27,10 @@ exports.getAllPosts = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    const query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, NOW(), ?, ?);'
-
-    console.log(req.body.post_time)
+    const query = 'INSERT INTO posts(author_username, post_time, content, topic) VALUES(?, NOW(), ?, ?);'
 
     connection.query(query, [
         req.session.user.username,
-        req.session.user.display_name,
         req.body.content,
         req.body.topic
     ], (err, rows) => {
