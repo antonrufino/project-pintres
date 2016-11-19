@@ -1,8 +1,11 @@
 (() => {
     angular.module('app')
-    .controller('PostCtrl', ['$scope', '$http', postController]);
+    .controller('PostCtrl', ['$scope', '$http', 'UserService', postController]);
 
-    function postController($scope, $http) {
+    function postController($scope, $http, UserService) {
+        let user = {};
+        UserService(user);
+
         $scope.post = {
             id: '',
             post_time: '',
@@ -29,21 +32,18 @@
 
         $scope.createPost = () => {
             let post = Object.assign({}, $scope.post);
-            $scope.post.post_time = new Date();
-            post.post_time = $scope.post.post_time
-                .toISOString().slice(0, 19).replace('T', ' ');
+
+            post.author_username = user.username;
+            post.author_display_name = user.display_name;
 
             $http.post('/api/post', post)
             .then((response) => {
                 Materialize.toast('Posted!', 3000);
-                post.post_time = $scope.post.post_time;
                 post.id = response.data.insertId;
+                post.post_time = response.data.insertDate;
                 $scope.posts.push(post);
-                console.log(post);
 
                 $scope.post = {
-                    author_display_name: '',
-                    author_username: '',
                     post_time: '',
                     content: '',
                     topic: ''
@@ -51,8 +51,6 @@
             }, (response) => {
                 Materialize.toast('Oops! Something went wrong.', 3000);
                 $scope.post = {
-                    author_display_name: '',
-                    author_username: '',
                     post_time: '',
                     content: '',
                     topic: ''

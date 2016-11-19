@@ -25,12 +25,13 @@ exports.getAllPosts = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    const query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, STR_TO_DATE(?, \'%Y-%m-%d %T\'), ?, ?);'
+    const query = 'INSERT INTO posts(author_username, author_display_name, post_time, content, topic) VALUES(?, ?, NOW(), ?, ?);'
+
+    console.log(req.body.post_time)
 
     connection.query(query, [
         req.session.user.username,
         req.session.user.display_name,
-        req.body.post_time,
         req.body.content,
         req.body.topic
     ], (err, rows) => {
@@ -38,6 +39,7 @@ exports.addPost = (req, res) => {
             res.status(400).send(err);
             console.log(err);
         } else {
+            rows.insertDate = new Date();
             res.send(rows);
         }
     });
