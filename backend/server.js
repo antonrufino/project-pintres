@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     if (req.session.user === undefined) {
         if (req.originalUrl.indexOf("login") !== -1) {
             next();
-        } else if (req.originalUrl.startsWith('/404.html')) {
+        } else if (req.originalUrl.startsWith('/not-found')) {
             next();
         } else if (req.originalUrl.startsWith('/css')) {
             next();
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
         } else if (req.originalUrl.startsWith('/api')) {
             res.status(403).send('Access denied!');
         } else {
-            res.redirect('/login.html');
+            res.redirect('/login');
         }
     } else {
         next();

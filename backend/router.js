@@ -1,6 +1,7 @@
 const postController = require(__dirname + '/controllers/post-controller');
 const authController = require(__dirname + '/controllers/auth-controller');
 const userController = require(__dirname + '/controllers/user-controller');
+const routeController = require(__dirname + '/controllers/route-controller');
 
 module.exports = (router) => {
     router.post('/api/login', authController.login);
@@ -15,8 +16,10 @@ module.exports = (router) => {
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 
+    router.get('/main', routeController.main);
+    router.get('/not-found', routeController.notFound)
     router.all('*', (req, res) => {
-        res.status(404).redirect('/404.html');
+        res.status(404).redirect('/not-found');
     });
 
     return router;

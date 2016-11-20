@@ -18,7 +18,7 @@ exports.login = (req, res) => {
                     display_name: rows[0].display_name
                 };
 
-                res.redirect('/')
+                res.redirect('/main');
             } else {
                 res.send({success: false});
             }
@@ -36,10 +36,10 @@ exports.logintest = (req, res) => {
         display_name: 'Anton Rufino'
     }
 
-    res.redirect('/index.html');
+    res.redirect('/main');
 }
 
 exports.logout = (req, res) => {
     req.session = null;
-    res.redirect('/login.html');
+    res.redirect('/login');
 }
