@@ -16,7 +16,7 @@ module.exports = (router) => {
     router.post('/api/post/edit', postController.editPost);
 
     router.all('*', (req, res) => {
-        res.redirect(404, '/404.html');
+        res.status(404).redirect('/404.html');
     });
 
     return router;

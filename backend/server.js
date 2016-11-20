@@ -15,6 +15,12 @@ app.use((req, res, next) => {
     if (req.session.user === undefined) {
         if (req.originalUrl.indexOf("login") !== -1) {
             next();
+        } else if (req.originalUrl.startsWith('/404.html')) {
+            next();
+        } else if (req.originalUrl.startsWith('/css')) {
+            next();
+        } else if (req.originalUrl.startsWith('/bower_components')) {
+            next();
         } else if (req.originalUrl.startsWith('/api')) {
             res.status(403).send('Access denied!');
         } else {
