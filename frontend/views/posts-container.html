@@ -21,12 +21,12 @@
                             <i class="material-icons">bookmark_border</i>
                         </a>
                         <div ng-show="user.username === post.author_username">
-                        <a data-target="edit-post-modal"
+                        <a href="" data-target="edit-post-modal"
                             class="col s2 red-text text-darken-2"
                             ng-click="setPending(post.id)">
                             <i class="material-icons">mode_edit</i>
                         </a>
-                        <a data-target="delete-post-modal"
+                        <a href="" data-target="delete-post-modal"
                             class="col s2 red-text text-darken-2"
                             ng-click="setPending(post.id)">
                             <i class="material-icons">delete</i>
@@ -38,7 +38,8 @@
         </div>
     </div>
     <div class="fixed-action-btn">
-        <a class="btn-floating red darken-2 btn-large" data-target="new-post-modal">
+        <a class="btn-floating red darken-2 btn-large"
+            href="" data-target="new-post-modal">
             <i class="material-icons">add</i>
         </a>
     </div>
