@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html ng-app="app">
     <head>
@@ -8,10 +10,11 @@
 
         <link href="bower_components/materialize/dist/css/materialize.min.css" rel="stylesheet" />
         <link href="css/main.css" rel="stylesheet" />
+        <link href="css/icon.css" rel="stylesheet" />
 
         <title>Pintres</title>
     </head>
-    <body ng-cloak>
+    <body ng-cloak class="grey lighten-3">
         <pin-sidebar></pin-sidebar>
         <main class="grey lighten-3">
             <nav class="white fixed">
@@ -19,16 +22,16 @@
                     <span class="brand-logo center red-text text-darken-2">Feed</span>
                 </div>
             </nav>
-            <pin-posts-container></pin-posts-container>
-            <pin-new-post></pin-new-post>
-            <pin-delete-post></pin-delete-post>
-            <pin-edit-post></pin-edit-post>
+            <div ng-view>
+            </div>
         </main>
 
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="app.js"></script>
+        <script src="directives.js"></script>
         <script src="services/user-service.js"></script>
         <script src="controllers/post-controller.js"></script>
         <script src="controllers/sidebar-controller.js"></script>

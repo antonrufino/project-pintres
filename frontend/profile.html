@@ -1,251 +1,250 @@
 <!DOCTYPE>
 
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="author" content="Czes Arianne Yeban">
-		<meta name="description" content="I3 Integrator login page">
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Czes Arianne Yeban">
+        <meta name="description" content="I3 Integrator login page">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-		<!-- Page title and icon -->
-		<title>Pintres | Profile</title>
-		<link rel="icon" href="../assets/images/icon.png">
-		
-		<!-- Cascading Style Sheets (CSS) -->
-		<link rel="stylesheet" type="text/css" href="../assets/css/materialize.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/icon.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-		
-		<!-- JavaScripts (JS) -->
-		<script type="text/javascript" src="../assets/js/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="../assets/js/materialize.js"> </script>
-		<script>
-			$(document).ready(function(){
-				// show profile's drop down menu
-				$(".dropdown-button").dropdown();
-				
-				// show the side navigation bar once the corresponding icon was clicked
-				$(".button-collapse").sideNav();
-				
-				// shows the default tab (Boards) then goes to top of page
-				document.getElementById("defaultOpen").click();
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-			});
-			
-		</script>
-		<script>
-			// Switches tab content corresponding to the clicked tab link
-			function SwitchTab(evt, tabname) {
-				// Declare all variables
-				var i, tabcontent, tablinks;
+        <!-- Page title and icon -->
+        <title>Pintres | Profile</title>
 
-				// Get all elements with class="tabcontent" and hide them
-				tabcontent = document.getElementsByClassName("tabcontent");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
+        <!-- Cascading Style Sheets (CSS) -->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="bower_components/materialize/dist/css/materialize.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
-				// Get all elements with class="tablinks" and remove the class "active"
-				tablinks = document.getElementsByClassName("tablinks");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(" active", "");
-				}
+        <!-- JavaScripts (JS) -->
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"> </script>
+        <script>
+            $(document).ready(function(){
+                // show profile's drop down menu
+                $(".dropdown-button").dropdown();
 
-				// Show the current tab, and add an "active" class to the link that opened the tab
-				document.getElementById(tabname).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-			
-			// Clears search field when "X" is clicked
-			function ClearField() {
-				document.getElementById("search").value = "";
-			}
-		</script>
-	</head>
-	<body>
-		<nav role="navigation" class="red darken-2">
-			<div class="nav-wrapper">
-				<!-- if window is resized or mobile was used to open the homepage, show a collapsible side navigation bar through the menu icon -->
-				<a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-				
-				<!-- Desktop view left side menu -->
-				<ul class="left hide-on-med-and-down">
-					<li>
-						<a href="#"><img src="../assets/images/logo.png" style="height:64px"></a>
-					</li>
-					<li style="width: 1060px">
-						<div class="nav-wrapper">
-							<form>
-								<div class="input-field">
-									<input id="search" type="search"/>
-									<label for="search">
-									<i class="mdi-action-search"></i></label>
-									<i class="mdi-navigation-close close" onclick="ClearField();"></i>
-								</div>
-							</form>
-						</div>
-					</li>
-				</ul>
-				
-				<!-- dropdown for profile option -->
-				<ul id="dropdown1" class="dropdown-content">
-					<li><a href="profile.html">View Profile</a></li>
-					<li><a href="#!">Edit Profile</a></li>
-					<li><a href="#!">Settings</a></li>
-					<li><a href="#!">Access Business Tools</a></li>
-					<li><a href="#!">Find Friends</a></li>
-					<li><a href="#!">Get Help</a></li>
-					<li><a href="#!">Logout</a></li>
-				</ul>
-				
-				<!-- Desktop view right side menu -->
-				<ul class="right hide-on-med-and-down">
-					<li>
-						<a class="dropdown-button" data-constrainwidth="false" href="#!" data-activates="dropdown1">
-						<i class="material-icons">assignment_ind</i></a>
-					</li>
-					<li><a href="#"><i class="material-icons">view_list</i></a></li>
-					<li><a href="#"><i class="material-icons">textsms</i></a></li>
-				</ul>
-				
-				
-				<!-- mobile view collapsible side menu -->
-				<ul class="side-nav" id="side-nav">
-					<li><a href="#" target="_blank">Main Menu</a></li>
-					<li><a href="#" target="_blank">Profile</a></li>
-					<li><a href="#" target="_blank">Notifications</a></li>
-				</ul>
-			</div>
-		</nav>
-		
-		
-		<div class="container profile-top">
-			
-			<!-- User name, picture, and description -->
-			<div class="row">
-				<div class="col s12">
-					<div class="col s12">
-						<h3 class="left-align valign-wrapper grey-text text-darken-3 name">Czes Arianne Yeban</h3> <br/>
-					<h6 class="left-align grey-text text-darken-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h6>
-					</div>
-				</div>
-			</div>
-			
-			
-			<!------------------------------------ TAB LINKS ------------------------------------->
-			<div class="row">
-			
-				<!-- Board Tab Link -->
-				<div class="tab col s4">
-					<div class="card blue-grey darken-1">
-						<div class="card-action">
-							<a href="#boards" id="defaultOpen" class="tablinks" onclick="SwitchTab(event,'boards')"><h4>0</h4>Boards</a>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Board Tab Link -->
-				<div class="tab col s4">
-					<div class="card blue-grey darken-1">
-						<div class="card-action">
-							<a href="#posts" class="tablinks" onclick="SwitchTab(event,'posts')"><h4>0</h4>Posts</a>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Board Tab Link -->
-				<div class="tab col s4">
-					<div class="card blue-grey darken-1">
-						<div class="card-action">
-							<a href="#test" class="tablinks" onclick="SwitchTab(event,'topics')"><h4>0</h4>Topics</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--------------------------------- END OF TAB LINKS --------------------------------->
-			
-			
-			<!----------------------------------- TAB CONTENTS ----------------------------------->
-			<div class="row">
-				<div class="col s12">
-					
-					<!-- Boards Tab Content -->
-					<div id="boards" class="tabcontent">
-						<h3>Boards</h3>
-						<p>List of boards here.</p> 
-					</div>
+                // show the side navigation bar once the corresponding icon was clicked
+                $(".button-collapse").sideNav();
 
-					<!-- Posts Tab Content -->
-					<ul class="collection tabcontent" id="posts">
-						<li class="collection-item avatar">
-							<img src="../assets/images/dp.jpg" alt="" class="circle">
-							<span class="title">Title</span>
-							<p>First Line <br>
-								Second Line
-							</p>
-							<a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
-						</li>
-						<li class="collection-item avatar">
-							<i class="material-icons circle">folder</i>
-							<span class="title">Title</span>
-							<p>First Line <br>
-								Second Line
-							</p>
-							<a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
-						</li>
-						<li class="collection-item avatar">
-							<i class="material-icons circle green">insert_chart</i>
-							<span class="title">Title</span>
-							<p>First Line <br>
-								Second Line
-							</p>
-							<a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
-						</li>
-						<li class="collection-item avatar">
-							<i class="material-icons circle red">play_arrow</i>
-							<span class="title">Title</span>
-							<p>First Line <br>
-								Second Line
-							</p>
-							<a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
-						</li>
-					</ul>
+                // shows the default tab (Boards) then goes to top of page
+                document.getElementById("defaultOpen").click();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
 
-					<!-- Topics Tab Content -->
-					<div id="topics" class="tabcontent">
-						<h3>Topics</h3>
-						<p>List of topics here.</p>
-					</div>
-				
-				</div>
-			</div>
-			<!-------------------------------- END OF TAB CONTENTS ------------------------------->
-			
-		</div>
+        </script>
+        <script>
+            // Switches tab content corresponding to the clicked tab link
+            function SwitchTab(evt, tabname) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
 
-		
-		<!-------------------------------------- FOOTER -------------------------------------->
-		<footer class="page-footer red darken-2">
-			<div class="container">
-				<div class="row">
-					<div class="center col s12">
-						<h5 class="white-text">Group Members</h5>
-						<p class="grey-text text-lighten-2">
-							Anton Rufino <br/>
-							Mariqueen Tenedero <br/>
-							Czes Arianne Yeban
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="footer-copyright">
-				<div class="container">
-					&copy 2016 Copyright Text
-					<span class="grey-text text-lighten-4 right" href="#!">CMSC 100 Project</span>
-				</div>
-			</div>
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the link that opened the tab
+                document.getElementById(tabname).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            // Clears search field when "X" is clicked
+            function ClearField() {
+                document.getElementById("search").value = "";
+            }
+        </script>
+    </head>
+    <body>
+        <nav role="navigation" class="red darken-2">
+            <div class="nav-wrapper">
+                <!-- if window is resized or mobile was used to open the homepage, show a collapsible side navigation bar through the menu icon -->
+                <a href="#" data-activates="side-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+
+                <!-- Desktop view left side menu -->
+                <ul class="left hide-on-med-and-down">
+                    <li>
+                        <a href="#"><img src="../assets/images/logo.png" style="height:64px"></a>
+                    </li>
+                    <li style="width: 1060px">
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search"/>
+                                    <label for="search">
+                                    <i class="mdi-action-search"></i></label>
+                                    <i class="mdi-navigation-close close" onclick="ClearField();"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- dropdown for profile option -->
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="profile.html">View Profile</a></li>
+                    <li><a href="#!">Edit Profile</a></li>
+                    <li><a href="#!">Settings</a></li>
+                    <li><a href="#!">Access Business Tools</a></li>
+                    <li><a href="#!">Find Friends</a></li>
+                    <li><a href="#!">Get Help</a></li>
+                    <li><a href="#!">Logout</a></li>
+                </ul>
+
+                <!-- Desktop view right side menu -->
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a class="dropdown-button" data-constrainwidth="false" href="#!" data-activates="dropdown1">
+                        <i class="material-icons">assignment_ind</i></a>
+                    </li>
+                    <li><a href="#"><i class="material-icons">view_list</i></a></li>
+                    <li><a href="#"><i class="material-icons">textsms</i></a></li>
+                </ul>
+
+
+                <!-- mobile view collapsible side menu -->
+                <ul class="side-nav" id="side-nav">
+                    <li><a href="#" target="_blank">Main Menu</a></li>
+                    <li><a href="#" target="_blank">Profile</a></li>
+                    <li><a href="#" target="_blank">Notifications</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="container profile-top">
+
+            <!-- User name, picture, and description -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12">
+                        <h3 class="left-align valign-wrapper grey-text text-darken-3 name">Czes Arianne Yeban</h3> <br/>
+                    <h6 class="left-align grey-text text-darken-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h6>
+                    </div>
+                </div>
+            </div>
+
+
+            <!------------------------------------ TAB LINKS ------------------------------------->
+            <div class="row">
+
+                <!-- Board Tab Link -->
+                <div class="tab col s4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-action">
+                            <a href="#boards" id="defaultOpen" class="tablinks" onclick="SwitchTab(event,'boards')"><h4>0</h4>Boards</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Board Tab Link -->
+                <div class="tab col s4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-action">
+                            <a href="#posts" class="tablinks" onclick="SwitchTab(event,'posts')"><h4>0</h4>Posts</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Board Tab Link -->
+                <div class="tab col s4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-action">
+                            <a href="#test" class="tablinks" onclick="SwitchTab(event,'topics')"><h4>0</h4>Topics</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------- END OF TAB LINKS --------------------------------->
+
+
+            <!----------------------------------- TAB CONTENTS ----------------------------------->
+            <div class="row">
+                <div class="col s12">
+
+                    <!-- Boards Tab Content -->
+                    <div id="boards" class="tabcontent">
+                        <h3>Boards</h3>
+                        <p>List of boards here.</p>
+                    </div>
+
+                    <!-- Posts Tab Content -->
+                    <ul class="collection tabcontent" id="posts">
+                        <li class="collection-item avatar">
+                            <img src="../assets/images/dp.jpg" alt="" class="circle">
+                            <span class="title">Title</span>
+                            <p>First Line <br>
+                                Second Line
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle">folder</i>
+                            <span class="title">Title</span>
+                            <p>First Line <br>
+                                Second Line
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle green">insert_chart</i>
+                            <span class="title">Title</span>
+                            <p>First Line <br>
+                                Second Line
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle red">play_arrow</i>
+                            <span class="title">Title</span>
+                            <p>First Line <br>
+                                Second Line
+                            </p>
+                            <a href="#!" class="secondary-content"><i class="material-icons blue-grey-text text-darken-1">grade</i></a>
+                        </li>
+                    </ul>
+
+                    <!-- Topics Tab Content -->
+                    <div id="topics" class="tabcontent">
+                        <h3>Topics</h3>
+                        <p>List of topics here.</p>
+                    </div>
+
+                </div>
+            </div>
+            <!-------------------------------- END OF TAB CONTENTS ------------------------------->
+
+        </div>
+
+
+        <!-------------------------------------- FOOTER -------------------------------------->
+        <footer class="page-footer red darken-2">
+            <div class="container">
+                <div class="row">
+                    <div class="center col s12">
+                        <h5 class="white-text">Group Members</h5>
+                        <p class="grey-text text-lighten-2">
+                            Anton Rufino <br/>
+                            Mariqueen Tenedero <br/>
+                            Czes Arianne Yeban
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    &copy 2016 Copyright Text
+                    <span class="grey-text text-lighten-4 right" href="#!">CMSC 100 Project</span>
+                </div>
+            </div>
         </footer>
-		<!----------------------------------- END OF FOOTER ---------------------------------->
-		
-	</body>
+        <!----------------------------------- END OF FOOTER ---------------------------------->
+
+    </body>
 </html>
