@@ -16,6 +16,7 @@ module.exports = (router) => {
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 
+    router.get('/login', routeController.login)
     router.get('/main', routeController.main);
     router.get('/not-found', routeController.notFound)
     router.all('*', (req, res) => {
