@@ -4,7 +4,7 @@ exports.login = (req, res) => {
     let query = 'SELECT username, display_name FROM users WHERE \
         username = ? and password = PASSWORD(?);';
 
-    db.connection.query(query, [
+    connection.query(query, [
         req.body.username,
         req.body.password
     ], (err, rows) => {
