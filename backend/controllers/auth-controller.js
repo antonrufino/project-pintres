@@ -2,7 +2,7 @@ const connection = require(__dirname + '/../db');
 
 exports.login = (req, res) => {
     let query = 'SELECT username, display_name FROM users WHERE \
-        username = PASSWORD(?) and password = PASSWORD(?);';
+        username = ? and password = PASSWORD(?);';
 
     db.connection.query(query, [
         req.body.username,
