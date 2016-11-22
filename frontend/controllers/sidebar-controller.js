@@ -4,8 +4,7 @@
 
     function sidebarController($scope, $http, UserService) {
         $scope.user = {
-            username: '',
-            display_name: ''
+            username: ''
         };
 
         $scope.loadUserData = () => {

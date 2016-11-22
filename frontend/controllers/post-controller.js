@@ -34,7 +34,6 @@
             let post = Object.assign({}, $scope.post);
 
             post.author_username = user.username;
-            post.author_display_name = user.display_name;
 
             $http.post('/api/post', post)
             .then((response) => {
@@ -93,7 +92,6 @@
                 }
 
                 $scope.post = {
-                    author_display_name: '',
                     author_username: '',
                     post_time: '',
                     content: '',
@@ -102,7 +100,6 @@
             }), (response) => {
                 Materialize.toast('Oops! Something went wrong.', 3000);
                 $scope.post = {
-                    author_display_name: '',
                     author_username: '',
                     post_time: '',
                     content: '',
