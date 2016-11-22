@@ -1,13 +1,23 @@
 (() => {
     angular.module('app')
-    .factory('UserService', ['$http', UserService])
+    .factory('UserService', ['$http', '$q', UserService])
 
-    function UserService($http) {
-        return (user) => {
+    function UserService($http, $q) {
+        function getCurrentUserData() {
+            let deferred = $q.defer();
+
             $http.get('/api/user')
-            .then((response) => {
-                user.username = response.data.username;
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deffered.reject(err);
             });
+
+            return deferred.promise;
+        }
+
+        return {
+            getCurrentUserData: getCurrentUserData
         }
     }
 })();

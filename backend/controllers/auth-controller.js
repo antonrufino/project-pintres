@@ -14,8 +14,7 @@ exports.login = (req, res) => {
         } else {
             if (rows.length > 0) {
                 req.session.user = {
-                    username: req.body.username,
-                    display_name: rows[0].display_name
+                    username: req.body.username
                 };
 
                 res.redirect('/main');
@@ -32,8 +31,7 @@ exports.logintest = (req, res) => {
         username = PASSWORD(?) and password = PASSWORD(?);';
 
     req.session.user = {
-        username: 'antonrufino',
-        display_name: 'Anton Rufino'
+        username: 'antonrufino'
     }
 
     res.redirect('/main');
