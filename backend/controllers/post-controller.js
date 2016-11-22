@@ -13,9 +13,7 @@ exports.getPost = (req, res) => {
 }
 
 exports.getAllPosts = (req, res) => {
-    const query = 'SELECT posts.id, posts.author_username, users.display_name \
-        as author_display_name, posts.post_time, posts.content, posts.topic \
-        FROM posts JOIN users ON users.username = posts.author_username;';
+    const query = 'SELECT * FROM posts'
     connection.query(query, [], (err, rows) => {
         if (err) {
             res.status(400).send(err);
