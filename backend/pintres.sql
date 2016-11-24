@@ -17,6 +17,7 @@ CREATE TABLE posts(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (author_username) REFERENCES users(username)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE user_topic(
@@ -24,6 +25,7 @@ CREATE TABLE user_topic(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (username, topic),
     FOREIGN KEY (username) REFERENCES users(username)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE boards(
@@ -32,16 +34,20 @@ CREATE TABLE boards(
     creator VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (creator) REFERENCES users(username)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE board_post(
     board_id INT,
     post_id INT NOT NULL,
     PRIMARY KEY (board_id, post_id),
-    FOREIGN KEY (board_id) REFERENCES boards(id),
+    FOREIGN KEY (board_id) REFERENCES boards(id)
+        ON DELETE CASCADE,
     FOREIGN KEY (post_id) REFERENCES posts(id)
+        ON DELETE CASCADE
 );
 
+-- Mock users
 INSERT INTO users(username, password, email)
 VALUES('antonrufino', PASSWORD('whatpassword'), 'anton@pintres.com');
 
@@ -50,3 +56,28 @@ VALUES('czesyeban', PASSWORD('frontendisheart'), 'czesyeban@pintres.com');
 
 INSERT INTO users(username, password, email)
 VALUES('mariqueentenedero', PASSWORD('loginisheart'), 'mariqueentenedero@pintres.com');
+
+-- Mock posts
+INSERT INTO posts(id, author_username, post_time, content, topic)
+VALUES(1, 'antonrufino', NOW(), 'kek', 'lulz');
+
+INSERT INTO posts(id, author_username, post_time, content, topic)
+VALUES(2, 'antonrufino', NOW(), 'alay', 'cmsc191');
+
+-- Mock subscribed topics
+INSERT INTO user_topic(username, topic)
+VALUES('antonrufino', 'lulz');
+
+INSERT INTO user_topic(username, topic)
+VALUES('czesyeban', 'kpop');
+
+-- Mock boards
+INSERT INTO boards(id, name, creator)
+VALUES(1, 'Acad Rants', 'antonrufino');
+
+-- Mock board posts
+INSERT INTO board_post(board_id, post_id)
+VALUES(1, 1);
+
+INSERT INTO board_post(board_id, post_id)
+VALUES(1, 2);
