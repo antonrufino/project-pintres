@@ -2,7 +2,7 @@
   "name": "project-pintres",
   "version": "1.0.0",
   "description": "CMSC 100 is <3",
-  "main": "backend/app.js",
+  "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
