@@ -80,16 +80,16 @@
 
                 for (let i = 0; i < $scope.posts.length; ++i) {
                     if ($scope.posts[i].id === this.pendingId) {
-                        $scope.posts[i].content = $scope.post.content;
-                        $scope.posts[i].topic = $scope.post.topic;
+                        $scope.posts[i].content = post.content;
+                        $scope.posts[i].topic = post.topic;
 
                         break;
                     }
                 }
-            }), (response) => {
+            }, (err) => {
                 Materialize.toast('Oops! Something went wrong.', 3000);
                 console.log(err);
-            }
+            });
         }
     }
 })();
