@@ -1,6 +1,6 @@
 (() => {
     angular.module('app', ['ngRoute'])
-    .config(['$routeProvider', routes])
+    .config(['$routeProvider', routes]);
 
     function routes($routeProvider) {
         $routeProvider
@@ -13,6 +13,5 @@
         .when('/profile', {
             templateUrl: 'views/profile.html'
         });
-    }
-
+    };
 })();

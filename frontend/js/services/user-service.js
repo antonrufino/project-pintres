@@ -16,8 +16,25 @@
             return deferred.promise;
         }
 
+        function login(username, password) {
+            let deferred = $q.defer();
+
+            $http.post('/api/login', {
+                username: username,
+                password: password
+            }).then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.resolve(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
-            getCurrentUserData: getCurrentUserData
+            getCurrentUserData: getCurrentUserData,
+            login: login
         }
     }
+
 })();

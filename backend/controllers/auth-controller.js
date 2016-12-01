@@ -1,7 +1,7 @@
 const connection = require(__dirname + '/../db');
 
 exports.login = (req, res) => {
-    let query = 'SELECT username, display_name FROM users WHERE \
+    let query = 'SELECT username FROM users WHERE \
         username = ? and password = PASSWORD(?);';
 
     connection.query(query, [
@@ -10,31 +10,19 @@ exports.login = (req, res) => {
     ], (err, rows) => {
         if (err) {
             console.log(err);
-            res.send(rows);
+            res.status(500).send(rows);
         } else {
             if (rows.length > 0) {
                 req.session.user = {
                     username: req.body.username
                 };
 
-                res.redirect('/main');
+                res.send({success: true});
             } else {
                 res.send({success: false});
             }
         }
     });
-}
-
-// testing only.
-exports.logintest = (req, res) => {
-    let query = 'SELECT username, display_name FROM users WHERE \
-        username = PASSWORD(?) and password = PASSWORD(?);';
-
-    req.session.user = {
-        username: 'antonrufino'
-    }
-
-    res.redirect('/main');
 }
 
 exports.logout = (req, res) => {

@@ -5,10 +5,10 @@ const routeController = require(__dirname + '/controllers/route-controller');
 
 module.exports = (router) => {
     router.post('/api/login', authController.login);
-    router.get('/api/login', authController.logintest);
     router.get('/api/logout', authController.logout);
 
     router.get('/api/user', userController.getUser);
+    router.post('/api/user', userController.createUser);
 
     router.post('/api/post', postController.addPost);
     router.get('/api/post', postController.getAllPosts)

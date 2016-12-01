@@ -21,8 +21,12 @@ app.use((req, res, next) => {
             next();
         } else if (req.originalUrl.startsWith('/bower_components')) {
             next();
+        } else if (req.originalUrl.startsWith('/api/user')) {
+            next();
         } else if (req.originalUrl.startsWith('/api')) {
             res.status(403).send('Access denied!');
+        } else if (req.originalUrl.startsWith('/js')) {
+            next();
         } else {
             res.redirect('/login');
         }
