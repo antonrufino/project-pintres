@@ -18,8 +18,24 @@
             return deferred.promise;
         }
 
+        function unsubscribe(username, topic) {
+            let deferred = $q.defer();
+
+            $http.post('/api/topic/unsubscribe', {
+                username: username,
+                topic: topic
+            }).then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
-            subscribe: subscribe
+            subscribe: subscribe,
+            unsubscribe: unsubscribe
         };
     }
 })();

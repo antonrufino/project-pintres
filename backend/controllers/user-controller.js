@@ -7,8 +7,6 @@ exports.getUser = (req, res) => {
 exports.getSubsrcibedTopics = (req, res) => {
     let query = 'SELECT topic FROM user_topic WHERE username = ?';
 
-    console.log(req.params);
-
     connection.query(query, [
         req.params.username
     ], (err, rows) => {

@@ -15,3 +15,19 @@ exports.subscribe = (req, res) => {
         }
     });
 }
+
+exports.unsubscribe = (req, res) => {
+    let query = 'DELETE FROM user_topic WHERE username = ? AND topic = ?';
+
+    connection.query(query, [
+        req.body.username,
+        req.body.topic
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows);
+        }
+    });
+}
