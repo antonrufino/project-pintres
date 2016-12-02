@@ -6,15 +6,14 @@
         $scope.login = () => {
             AuthService.login($scope.username, $scope.password)
             .then((res) => {
-                console.log("surprise");
-                console.log(res.data);
-                if (!res.data.success) {
+                if (res.data.length !== 1) {
                     Materialize.toast('Wrong credentials', 3000);
                 } else {
                     $window.location.href = '/main';
                 }
             }, (err) => {
                 console.log(err);
+                Materialize.toast('Something went wrong.');
             })
         }
 

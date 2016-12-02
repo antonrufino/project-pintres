@@ -10,17 +10,14 @@ exports.login = (req, res) => {
     ], (err, rows) => {
         if (err) {
             console.log(err);
-            res.status(500).send(rows);
+            res.status(500).send(err);
         } else {
             if (rows.length > 0) {
                 req.session.user = {
                     username: req.body.username
                 };
-
-                res.send({success: true});
-            } else {
-                res.send({success: false});
             }
+            res.send(rows); 
         }
     });
 }

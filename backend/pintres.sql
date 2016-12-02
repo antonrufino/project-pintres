@@ -38,12 +38,22 @@ CREATE TABLE boards(
 );
 
 CREATE TABLE board_post(
-    board_id INT,
+    board_id INT NOT NULL,
     post_id INT NOT NULL,
     PRIMARY KEY (board_id, post_id),
     FOREIGN KEY (board_id) REFERENCES boards(id)
         ON DELETE CASCADE,
     FOREIGN KEY (post_id) REFERENCES posts(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE board_user(
+    board_id INT NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    PRIMARY KEY (board_id, username),
+    FOREIGN KEY (board_id) REFERENCES boards(board_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (board_id) REFERENCES users(username)
         ON DELETE CASCADE
 );
 
