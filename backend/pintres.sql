@@ -53,7 +53,7 @@ CREATE TABLE board_user(
     PRIMARY KEY (board_id, username),
     FOREIGN KEY (board_id) REFERENCES boards(board_id)
         ON DELETE CASCADE,
-    FOREIGN KEY (board_id) REFERENCES users(username)
+    FOREIGN KEY (username) REFERENCES users(username)
         ON DELETE CASCADE
 );
 

@@ -2,6 +2,7 @@ const postController = require(__dirname + '/controllers/post-controller');
 const authController = require(__dirname + '/controllers/auth-controller');
 const userController = require(__dirname + '/controllers/user-controller');
 const routeController = require(__dirname + '/controllers/route-controller');
+const topicController = require(__dirname + '/controllers/topic-controller');
 
 module.exports = (router) => {
     router.post('/api/login', authController.login);
@@ -9,12 +10,14 @@ module.exports = (router) => {
 
     router.get('/api/user', userController.getUser);
     router.post('/api/user', userController.createUser);
+    router.get('/api/user/:username/topics/subscribed', userController.getSubsrcibedTopics)
 
     router.post('/api/post', postController.addPost);
-    router.get('/api/post', postController.getAllPosts)
-    router.get('/api/post/:id', postController.getPost);
+    router.get('/api/post', postController.getAllPosts);
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
+
+    router.post('/api/topic/subscribe', topicController.subscribe);
 
     router.get('/login', routeController.login)
     router.get('/main', routeController.main);

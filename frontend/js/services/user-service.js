@@ -16,6 +16,19 @@
             return deferred.promise;
         }
 
+        function getSubsrcibedTopics(username) {
+            let deferred = $q.defer();
+
+            $http.get('/api/user/' + username + '/topics/subscribed')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         function login(username, password) {
             let deferred = $q.defer();
 
@@ -33,7 +46,8 @@
 
         return {
             getCurrentUserData: getCurrentUserData,
-            login: login
+            login: login,
+            getSubsrcibedTopics: getSubsrcibedTopics
         }
     }
 

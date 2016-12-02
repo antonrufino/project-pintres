@@ -19,19 +19,28 @@
                     </div>
                 </div>
                 <div class="card-action">
-                    <a data-target="" class="red-text text-darken-2">
+                    <a href="" data-target=""
+                        class="red-text text-darken-2"
+                        ng-click="subscribeToTopic(post.topic)"
+                        ng-hide="isSubscribedToTopic(post.topic)">
                         <i class="material-icons">bookmark_border</i>
+                    </a>
+                    <a href="" data-target=""
+                        class="red-text text-darken-2"
+                        ng-click=""
+                        ng-show="isSubscribedToTopic(post.topic)">
+                        <i class="material-icons">bookmark</i>
                     </a>
                     <a href="" data-target="edit-post-modal"
                         class="red-text text-darken-2"
                         ng-click="setPending(post.id)"
-                        ng-show="username === post.author_username">
+                        ng-show="user.username === post.author_username">
                         <i class="material-icons">mode_edit</i>
                     </a>
                     <a href="" data-target="delete-post-modal"
                         class="red-text text-darken-2"
                         ng-click="setPending(post.id)"
-                        ng-show="username === post.author_username">
+                        ng-show="user.username === post.author_username">
                         <i class="material-icons">delete</i>
                     </a>
                 </div>
