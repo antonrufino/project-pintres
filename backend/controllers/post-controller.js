@@ -12,14 +12,16 @@ exports.getPost = (req, res) => {
     });
 }
 
-exports.getAllPosts = (req, res) => {
-    const query = 'SELECT * FROM posts'
-    connection.query(query, [], (err, rows) => {
+exports.generateFeed = (req, res) => {
+    const query = 'CALL generateFeed(?)'
+    connection.query(query, [
+        req.session.user.username
+    ], (err, rows) => {
         if (err) {
             res.status(400).send(err);
             console.log(err);
         } else {
-            res.send(rows);
+            res.send(rows[0]);
         }
     });
 }

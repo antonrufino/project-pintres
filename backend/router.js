@@ -13,8 +13,6 @@ module.exports = (router) => {
     router.get('/api/user/:username/topics/subscribed', userController.getSubsrcibedTopics)
 
     router.get('/api/feed', postController.generateFeed);
-
-    router.post('/api/post', postController.addPost);
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 

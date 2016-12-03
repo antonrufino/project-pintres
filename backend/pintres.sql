@@ -57,6 +57,21 @@ CREATE TABLE board_user(
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+DELIMITER |
+CREATE FUNCTION generateFeed(_username VARCHAR(50))
+BEGIN
+    SELECT * FROM posts WHERE id IN (
+        SELECT id FROM posts WHERE topic IN (
+            SELECT topic FROM user_topic WHERE username = _username
+        )
+    )
+    OR id IN (
+        SELECT board_post.post_id FROM board_user JOIN board_post
+            ON board_user.board_id = board_post.board_id
+        WHERE board_user.username = _username
+    );
+END|
+DELIMITER ;
 -- Mock users
 INSERT INTO users(username, password, email)
 VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
