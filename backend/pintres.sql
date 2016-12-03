@@ -17,7 +17,7 @@ CREATE TABLE posts(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (author_username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE user_topic(
@@ -25,7 +25,7 @@ CREATE TABLE user_topic(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (username, topic),
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE boards(
@@ -34,7 +34,7 @@ CREATE TABLE boards(
     creator VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (creator) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE board_post(
@@ -51,15 +51,15 @@ CREATE TABLE board_user(
     board_id INT NOT NULL,
     username VARCHAR(50) NOT NULL,
     PRIMARY KEY (board_id, username),
-    FOREIGN KEY (board_id) REFERENCES boards(board_id)
+    FOREIGN KEY (board_id) REFERENCES boards(id)
         ON DELETE CASCADE,
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Mock users
 INSERT INTO users(username, password, email)
-VALUES('antonrufino', PASSWORD('whatpassword'), 'anton@pintres.com');
+VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
 
 INSERT INTO users(username, password, email)
 VALUES('czesyeban', PASSWORD('frontendisheart'), 'czesyeban@pintres.com');
