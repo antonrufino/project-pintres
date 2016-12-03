@@ -8,7 +8,8 @@
             redirectTo: '/feed'
         })
         .when('/feed', {
-            templateUrl: 'views/feed.html'
+            templateUrl: 'views/feed.html',
+            controller: 'FeedCtrl'
         })
         .when('/profile', {
             templateUrl: 'views/profile.html'

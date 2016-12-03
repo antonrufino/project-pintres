@@ -10,29 +10,25 @@
     .directive('pinPostsContainer', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/posts-container.html',
-            controller: 'PostCtrl'
+            templateUrl: 'views/posts-container.html'
         }
     })
     .directive('pinNewPost', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/new-post.html',
-            controller: 'PostCtrl'
+            templateUrl: 'views/new-post.html'
         }
     })
     .directive('pinDeletePost', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/delete-post.html',
-            controller: 'PostCtrl'
+            templateUrl: 'views/delete-post.html'
         };
     })
     .directive('pinEditPost', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/edit-post.html',
-            controller: 'PostCtrl'
+            templateUrl: 'views/edit-post.html'
         };
     });
 })();

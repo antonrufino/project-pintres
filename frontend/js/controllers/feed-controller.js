@@ -1,9 +1,9 @@
 (() => {
     angular.module('app')
-    .controller('PostCtrl', ['$scope', 'UserService', 'PostService',
-        'TopicService', postController]);
+    .controller('FeedCtrl', ['$scope', 'UserService', 'PostService',
+        'TopicService', feedController]);
 
-    function postController($scope, UserService, PostService, TopicService) {
+    function feedController($scope, UserService, PostService, TopicService) {
         $scope.user = {}
 
         UserService.getCurrentUserData()
@@ -28,15 +28,13 @@
             this.pending = value;
         }
 
-        $scope.loadPosts = () => {
-            PostService.loadPosts()
-            .then((res) => {
-                $scope.posts = res.data;
-            }, (err) => {
-                Materialize.toast('Cannot load posts.', 3000);
-                console.log(err);
-            })
-        };
+        PostService.loadPosts()
+        .then((res) => {
+            $scope.posts = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot load posts.', 3000);
+            console.log(err);
+        });
 
         $scope.createPost = () => {
             const post = {
