@@ -18,8 +18,9 @@ module.exports = (router) => {
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 
-    router.post('/api/topic/subscribe', topicController.subscribe);
-    router.post('/api/topic/unsubscribe', topicController.unsubscribe);
+    router.post('/api/topic/:topic/subscribe', topicController.subscribe);
+    router.post('/api/topic/:topic/unsubscribe', topicController.unsubscribe);
+    router.get('/api/topic/:topic', topicController.getTopicPosts);
 
     router.get('/login', routeController.login)
     router.get('/main', routeController.main);
