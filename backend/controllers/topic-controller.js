@@ -5,7 +5,7 @@ exports.subscribe = (req, res) => {
 
     connection.query(query, [
         req.body.username,
-        req.body.topic
+        req.params.topic
     ], (err, rows) => {
         if (err) {
             console.log(err);
@@ -21,7 +21,22 @@ exports.unsubscribe = (req, res) => {
 
     connection.query(query, [
         req.body.username,
-        req.body.topic
+        req.params.topic
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows);
+        }
+    });
+}
+
+exports.getTopicPosts = (req, res) => {
+    let query = 'SELECT * FROM posts WHERE topic = ? ORDER BY post_time DESC';
+
+    connection.query(query, [
+        req.params.topic
     ], (err, rows) => {
         if (err) {
             console.log(err);

@@ -14,7 +14,13 @@
                     </p>
                     <div class="row">
                         <div class="col s6" style="padding-left: 0px">
-                            <span class="red-text darken-2">From {{post.topic}}</span>
+                            <span class="red-text darken-2">From
+                                <a ng-href="#/topic/{{post.topic}}"
+                                    class="red-text"
+                                    style="text-decoration: underline">
+                                    {{post.topic}}
+                                </a>
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,10 @@
         })
         .when('/profile', {
             templateUrl: 'views/profile.html'
+        })
+        .when('/topic/:topic', {
+            templateUrl: 'views/topic.html',
+            controller: 'TopicCtrl'
         });
     };
 })();
