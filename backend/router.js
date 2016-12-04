@@ -13,7 +13,10 @@ module.exports = (router) => {
 
     router.get('/api/user', userController.getUser);
     router.post('/api/user', userController.createUser);
-    router.get('/api/user/:username/topics/subscribed', userController.getSubscribedTopics)
+    router.get('/api/user/:username/topics/subscribed', userController.getSubscribedTopics);
+    router.get('/api/user/:username/boards/subscribed', userController.getSubscribedBoards);
+    router.get('/api/user/:username/boards', userController.getBoardsByUser)
+    router.get('/api/user/:username/posts', userController.getPostsByUser);
 
     router.get('/api/feed', postController.generateFeed);
     router.post('/api/post', postController.addPost);

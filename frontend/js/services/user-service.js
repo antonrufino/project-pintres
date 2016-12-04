@@ -44,11 +44,53 @@
             return deferred.promise;
         }
 
+        function getSubscribedBoards(username) {
+            let deferred = $q.defer();
+
+            $http.get('/api/user/' + username + '/boards/subscribed')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
+        function getBoardsByUser(username) {
+            let deferred = $q.defer();
+
+            $http.get('/api/user/' + username + '/boards')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
+        function getPostsByUser(username) {
+            let deferred = $q.defer();
+
+            $http.get('/api/user/' + username + '/posts')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             getCurrentUserData: getCurrentUserData,
             login: login,
-            getSubscribedTopics: getSubscribedTopics
-        }
+            getSubscribedTopics: getSubscribedTopics,
+            getSubscribedBoards: getSubscribedBoards,
+            getBoardsByUser: getBoardsByUser,
+            getPostsByUser: getPostsByUser
+        };
     }
 
 })();

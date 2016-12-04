@@ -23,7 +23,37 @@ exports.getSubscribedBoards = (req, res) => {
     let query = 'CALL getSubscribedBoards(?)';
 
     connection.query(query, [
-        req.user.username
+        req.params.username
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows[0]);
+        }
+    });
+}
+
+exports.getBoardsByUser = (req, res) => {
+    let query = 'CALL getBoardsByUser(?)';
+
+    connection.query(query, [
+        req.params.username
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows[0]);
+        }
+    });
+}
+
+exports.getPostsByUser = (req, res) => {
+    let query = 'SELECT * FROM posts WHERE author_username = ?';
+
+    connection.query(query, [
+        req.params.username
     ], (err, rows) => {
         if (err) {
             console.log(err);

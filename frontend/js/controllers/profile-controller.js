@@ -1,62 +1,50 @@
 (() => {
     angular.module('app')
-    .controller('TopicCtrl', ['$scope', '$routeParams', 'UserService',
-        'PostService', 'TopicService', topicController]);
+    .controller('ProfileCtrl', ['$scope', '$routeParams', 'UserService',
+        'PostService', 'TopicService', profileController]);
 
-    function topicController($scope, $routeParams, UserService, PostService,
+    function profileController($scope, $routeParams, UserService, PostService,
         TopicService) {
-        $scope.user = {};
-        $scope.topic = $routeParams.topic;
+        $scope.user = {username: $routeParams.username}
+        $scope.posts = [];
+        $scope.boardsByUser = [];
+        $scope.subscribedBoards = [];
 
-        UserService.getCurrentUserData()
+        UserService.getSubscribedTopics($scope.user.username)
         .then((res) => {
-            $scope.user.username = res.data.username;
-
-            UserService.getSubscribedTopics(res.data.username)
-            .then((res) => {
-                $scope.user.topics = res.data;
-            }, (err) => {
-                Materialize.toast('Cannot connect to server.', 3000);
-                console.log(err);
-            })
+            $scope.user.topics = res.data;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
         });
 
-        $scope.posts = [];
+        UserService.getPostsByUser($scope.user.username)
+        .then((res) => {
+            $scope.posts = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
+
+        UserService.getBoardsByUser($scope.user.username)
+        .then((res) => {
+            $scope.boardsByUser = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
+
+        UserService.getSubscribedBoards($scope.user.username)
+        .then((res) => {
+            $scope.subscribedBoards = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
 
         $scope.setPending = (value) => {
             this.pending = value;
         }
-
-        TopicService.getTopicPosts($routeParams.topic)
-        .then((res) => {
-            $scope.posts = res.data;
-        }, (err) => {
-            Materialize.toast('Cannot load posts.', 3000);
-            console.log(err);
-        });
-
-        $scope.createPost = () => {
-            const post = {
-                content: $scope.content,
-                topic: $scope.topic
-            }
-
-            PostService.createPost(post)
-            .then((res) => {
-                Materialize.toast('Posted!', 3000);
-
-                post.author_username = $scope.user.username;
-                post.post_time = res.data.insertDate;
-
-                $scope.posts.push(post);
-            }, (err) => {
-                Materialize.toast('Oops! Something went wrong.', 3000);
-                console.log(err);
-            })
-        };
 
         $scope.deletePost = () => {
             PostService.deletePost(this.pending)

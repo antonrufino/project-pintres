@@ -11,8 +11,9 @@
             templateUrl: 'views/feed.html',
             controller: 'FeedCtrl'
         })
-        .when('/profile', {
-            templateUrl: 'views/profile.html'
+        .when('/user/:username', {
+            templateUrl: 'views/profile.html',
+            controller: 'ProfileCtrl'
         })
         .when('/topic/:topic', {
             templateUrl: 'views/topic.html',

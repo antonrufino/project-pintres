@@ -75,22 +75,24 @@ END|
 
 CREATE PROCEDURE getSubscribedTopics(_username VARCHAR(50))
 BEGIN
-    SELECT topic, COUNT(posts.id) AS num_posts
-    FROM posts
-    WHERE topic IN (
-        SELECT topic
-        FROM user_topic
-        WHERE username = _username
-    ) GROUP BY topic;
+    SELECT topic, (
+        SELECT COUNT(id)
+        FROM posts
+        WHERE posts.topic = user_topic.topic
+    ) AS num_posts
+    FROM user_topic
+    WHERE username = _username
+    GROUP BY topic;
 END|
 
 CREATE PROCEDURE getSubscribedBoards(_username VARCHAR(50))
 BEGIN
-    SELECT boards.name AS board_name, COUNT(board_post.post_id) AS num_posts
+    SELECT boards.name AS board_name, COUNT(board_post.post_id) AS num_posts,
+        boards.creator as board_creator
     FROM board_user
     JOIN boards ON board_user.board_id = boards.id
     JOIN board_post ON board_user.board_id = board_post.board_id
-    WHERE board_user.username = _username
+    WHERE board_user.username = _username AND boards.creator != _username
     GROUP BY board_user.board_id;
 END|
 
@@ -116,13 +118,13 @@ VALUES('mariqueentenedero', PASSWORD('loginisheart'), 'mariqueentenedero@pintres
 
 -- Mock posts
 INSERT INTO posts(id, author_username, post_time, content, topic)
-VALUES(1, 'antonrufino', NOW(), 'kek', 'lulz');
+VALUES(1, 'mariqueentenedero', NOW(), 'kek', 'lulz');
 
 INSERT INTO posts(id, author_username, post_time, content, topic)
 VALUES(2, 'antonrufino', NOW(), 'alay', 'cmsc191');
 
 INSERT INTO posts(id, author_username, post_time, content, topic)
-VALUES(3, 'antonrufino', NOW(), 'topkek', 'lulz');
+VALUES(3, 'czesyeban', NOW(), 'topkek', 'lulz');
 
 -- Mock subscribed topics
 INSERT INTO user_topic(username, topic)
