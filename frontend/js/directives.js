@@ -10,7 +10,8 @@
     .directive('pinPostsContainer', () => {
         return {
             restrict: 'E',
-            templateUrl: 'views/posts-container.html'
+            templateUrl: 'views/posts-container.html',
+            controller: 'PostCtrl'
         }
     })
     .directive('pinNewPost', () => {
