@@ -16,7 +16,7 @@
             return deferred.promise;
         }
 
-        function getSubsrcibedTopics(username) {
+        function getSubscribedTopics(username) {
             let deferred = $q.defer();
 
             $http.get('/api/user/' + username + '/topics/subscribed')
@@ -47,7 +47,7 @@
         return {
             getCurrentUserData: getCurrentUserData,
             login: login,
-            getSubsrcibedTopics: getSubsrcibedTopics
+            getSubscribedTopics: getSubscribedTopics
         }
     }
 

@@ -12,7 +12,7 @@
         .then((res) => {
             $scope.user.username = res.data.username;
 
-            UserService.getSubsrcibedTopics(res.data.username)
+            UserService.getSubscribedTopics(res.data.username)
             .then((res) => {
                 $scope.user.topics = res.data;
             }, (err) => {

@@ -4,8 +4,8 @@ exports.getUser = (req, res) => {
     res.send(req.session.user);
 };
 
-exports.getSubsrcibedTopics = (req, res) => {
-    let query = 'SELECT topic FROM user_topic WHERE username = ?';
+exports.getSubscribedTopics = (req, res) => {
+    let query = 'CALL getSubscribedTopics(?)';
 
     connection.query(query, [
         req.params.username
@@ -14,7 +14,7 @@ exports.getSubsrcibedTopics = (req, res) => {
             console.log(err);
             res.status(500).send(err);
         } else {
-            res.status(200).send(rows);
+            res.status(200).send(rows[0]);
         }
     });
 }
