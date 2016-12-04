@@ -9,6 +9,7 @@
 
             $http.post('/api/post', post)
             .then((res) => {
+                console.log(res.data);
                 deferred.resolve(res);
             }, (err) => {
                 deferred.reject(err)

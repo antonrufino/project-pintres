@@ -16,6 +16,7 @@ module.exports = (router) => {
     router.get('/api/user/:username/topics/subscribed', userController.getSubsrcibedTopics)
 
     router.get('/api/feed', postController.generateFeed);
+    router.post('/api/post', postController.addPost);
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
 
@@ -35,8 +36,8 @@ module.exports = (router) => {
     router.get('/api/boarduser/:id', boardUserController.searchBoardUser);
     router.post('/api/boarduser/remove', boardUserController.deleteBoardUser);
 
-    router.post('/api/topic/subscribe', topicController.subscribe);
-    router.post('/api/topic/unsubscribe', topicController.unsubscribe);
+    router.post('/api/topic/:topic/subscribe', topicController.subscribe);
+    router.post('/api/topic/:topic/unsubscribe', topicController.unsubscribe);
     router.get('/api/topic/:topic', topicController.getTopicPosts);
 
     router.get('/login', routeController.login)

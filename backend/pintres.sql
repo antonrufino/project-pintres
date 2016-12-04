@@ -69,9 +69,10 @@ BEGIN
         SELECT board_post.post_id FROM board_user JOIN board_post
             ON board_user.board_id = board_post.board_id
         WHERE board_user.username = _username
-    );
+    ) ORDER BY post_time DESC;
 END|
 DELIMITER ;
+
 -- Mock users
 INSERT INTO users(username, password, email)
 VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
