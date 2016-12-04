@@ -58,7 +58,7 @@ CREATE TABLE board_user(
 );
 
 DELIMITER |
-CREATE FUNCTION generateFeed(_username VARCHAR(50))
+CREATE PROCEDURE generateFeed(_username VARCHAR(50))
 BEGIN
     SELECT * FROM posts WHERE id IN (
         SELECT id FROM posts WHERE topic IN (
@@ -72,7 +72,6 @@ BEGIN
     ) ORDER BY post_time DESC;
 END|
 DELIMITER ;
-
 -- Mock users
 INSERT INTO users(username, password, email)
 VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
