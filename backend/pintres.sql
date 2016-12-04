@@ -17,7 +17,7 @@ CREATE TABLE posts(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (author_username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE user_topic(
@@ -25,7 +25,7 @@ CREATE TABLE user_topic(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (username, topic),
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE boards(
@@ -34,7 +34,7 @@ CREATE TABLE boards(
     creator VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (creator) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE board_post(
@@ -51,15 +51,30 @@ CREATE TABLE board_user(
     board_id INT NOT NULL,
     username VARCHAR(50) NOT NULL,
     PRIMARY KEY (board_id, username),
-    FOREIGN KEY (board_id) REFERENCES boards(board_id)
+    FOREIGN KEY (board_id) REFERENCES boards(id)
         ON DELETE CASCADE,
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+DELIMITER |
+CREATE FUNCTION generateFeed(_username VARCHAR(50))
+BEGIN
+    SELECT * FROM posts WHERE id IN (
+        SELECT id FROM posts WHERE topic IN (
+            SELECT topic FROM user_topic WHERE username = _username
+        )
+    )
+    OR id IN (
+        SELECT board_post.post_id FROM board_user JOIN board_post
+            ON board_user.board_id = board_post.board_id
+        WHERE board_user.username = _username
+    );
+END|
+DELIMITER ;
 -- Mock users
 INSERT INTO users(username, password, email)
-VALUES('antonrufino', PASSWORD('whatpassword'), 'anton@pintres.com');
+VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
 
 INSERT INTO users(username, password, email)
 VALUES('czesyeban', PASSWORD('frontendisheart'), 'czesyeban@pintres.com');
