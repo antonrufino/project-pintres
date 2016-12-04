@@ -25,7 +25,7 @@ module.exports = (router) => {
     router.get('/api/board/:id', boardController.searchBoard);
     router.post('/api/board/remove', boardController.deleteBoard);
     router.post('/api/board/edit', boardController.editBoard);
-    
+
     router.post('/api/boardpost', boardPostController.addBoardPost);
     router.get('/api/boardpost', boardPostController.getAllBoardPosts);
     router.get('/api/boardpost/:id', boardPostController.searchBoardPost);
@@ -38,6 +38,7 @@ module.exports = (router) => {
 
     router.post('/api/topic/subscribe', topicController.subscribe);
     router.post('/api/topic/unsubscribe', topicController.unsubscribe);
+    router.get('/api/topic/:topic', topicController.getTopicPosts);
 
     router.get('/login', routeController.login)
     router.get('/main', routeController.main);
