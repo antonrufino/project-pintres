@@ -17,7 +17,7 @@ CREATE TABLE posts(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (author_username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE user_topic(
@@ -25,7 +25,7 @@ CREATE TABLE user_topic(
     topic VARCHAR(20) NOT NULL,
     PRIMARY KEY (username, topic),
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE boards(
@@ -33,8 +33,9 @@ CREATE TABLE boards(
     name VARCHAR(20) NOT NULL,
     creator VARCHAR(50) NOT NULL,
     PRIMARY KEY (id),
+    UNIQUE KEY (name, creator),
     FOREIGN KEY (creator) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE board_post(
@@ -51,15 +52,61 @@ CREATE TABLE board_user(
     board_id INT NOT NULL,
     username VARCHAR(50) NOT NULL,
     PRIMARY KEY (board_id, username),
-    FOREIGN KEY (board_id) REFERENCES boards(board_id)
+    FOREIGN KEY (board_id) REFERENCES boards(id)
         ON DELETE CASCADE,
     FOREIGN KEY (username) REFERENCES users(username)
-        ON DELETE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+DELIMITER |
+CREATE PROCEDURE generateFeed(_username VARCHAR(50))
+BEGIN
+    SELECT * FROM posts WHERE id IN (
+        SELECT id FROM posts WHERE topic IN (
+            SELECT topic FROM user_topic WHERE username = _username
+        )
+    )
+    OR id IN (
+        SELECT board_post.post_id FROM board_user JOIN board_post
+            ON board_user.board_id = board_post.board_id
+        WHERE board_user.username = _username
+    ) ORDER BY post_time DESC;
+END|
+
+CREATE PROCEDURE getSubscribedTopics(_username VARCHAR(50))
+BEGIN
+    SELECT topic, COUNT(posts.id) AS num_posts
+    FROM posts
+    WHERE topic IN (
+        SELECT topic
+        FROM user_topic
+        WHERE username = _username
+    ) GROUP BY topic;
+END|
+
+CREATE PROCEDURE getSubscribedBoards(_username VARCHAR(50))
+BEGIN
+    SELECT boards.name AS board_name, COUNT(board_post.post_id) AS num_posts
+    FROM board_user
+    JOIN boards ON board_user.board_id = boards.id
+    JOIN board_post ON board_user.board_id = board_post.board_id
+    WHERE board_user.username = _username
+    GROUP BY board_user.board_id;
+END|
+
+CREATE PROCEDURE getBoardsByUser(_username VARCHAR(50))
+BEGIN
+    SELECT boards.name AS board_name, COUNT(board_post.post_id) AS num_posts
+    FROM boards
+    JOIN board_post ON boards.id = board_post.board_id
+    WHERE creator = _username
+    GROUP BY board_id;
+END|
+DELIMITER ;
 
 -- Mock users
 INSERT INTO users(username, password, email)
-VALUES('antonrufino', PASSWORD('whatpassword'), 'anton@pintres.com');
+VALUES('antonrufino', PASSWORD('whatpassword'), 'antonrufino@pintres.com');
 
 INSERT INTO users(username, password, email)
 VALUES('czesyeban', PASSWORD('frontendisheart'), 'czesyeban@pintres.com');
@@ -74,9 +121,15 @@ VALUES(1, 'antonrufino', NOW(), 'kek', 'lulz');
 INSERT INTO posts(id, author_username, post_time, content, topic)
 VALUES(2, 'antonrufino', NOW(), 'alay', 'cmsc191');
 
+INSERT INTO posts(id, author_username, post_time, content, topic)
+VALUES(3, 'antonrufino', NOW(), 'topkek', 'lulz');
+
 -- Mock subscribed topics
 INSERT INTO user_topic(username, topic)
 VALUES('antonrufino', 'lulz');
+
+INSERT INTO user_topic(username, topic)
+VALUES('antonrufino', 'cmsc191');
 
 INSERT INTO user_topic(username, topic)
 VALUES('czesyeban', 'kpop');
@@ -85,9 +138,24 @@ VALUES('czesyeban', 'kpop');
 INSERT INTO boards(id, name, creator)
 VALUES(1, 'Acad Rants', 'antonrufino');
 
+INSERT INTO boards(id, name, creator)
+VALUES(2, 'Keks', 'czesyeban');
+
 -- Mock board posts
 INSERT INTO board_post(board_id, post_id)
 VALUES(1, 1);
 
 INSERT INTO board_post(board_id, post_id)
 VALUES(1, 2);
+
+INSERT INTO board_post(board_id, post_id)
+VALUES(2, 1);
+
+INSERT INTO board_post(board_id, post_id)
+VALUES(2, 2);
+
+INSERT INTO board_user(board_id, username)
+VALUES(1, 'antonrufino');
+
+INSERT INTO board_user(board_id, username)
+VALUES(2, 'antonrufino');

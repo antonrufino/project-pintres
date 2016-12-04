@@ -1,7 +1,7 @@
 const connection = require(__dirname + '/../db');
 
-exports.getPost = (req, res) => {
-    const query = 'SELECT * FROM posts WHERE id = ?;'
+exports.searchBoard = (req, res) => {
+    const query = 'SELECT * FROM boards WHERE id = ?;'
     connection.query(query, [req.params.id], (err, rows) => {
         if (err) {
             res.status(400).send(err);
@@ -12,27 +12,24 @@ exports.getPost = (req, res) => {
     });
 }
 
-exports.generateFeed = (req, res) => {
-    const query = 'CALL generateFeed(?)'
-    connection.query(query, [
-        req.session.user.username
-    ], (err, rows) => {
+exports.getAllBoards = (req, res) => {
+    const query = 'SELECT * FROM boards'
+    connection.query(query, [], (err, rows) => {
         if (err) {
             res.status(400).send(err);
             console.log(err);
         } else {
-            res.send(rows[0]);
+            res.send(rows);
         }
     });
 }
 
-exports.addPost = (req, res) => {
-    const query = 'INSERT INTO posts(author_username, post_time, content, topic) VALUES(?, NOW(), ?, ?);'
+exports.addBoard = (req, res) => {
+    const query = 'INSERT INTO boards(name, creator) VALUES(?, ?);'
 
     connection.query(query, [
-        req.session.user.username,
-        req.body.content,
-        req.body.topic
+	    req.body.name,
+        req.session.user.username
     ], (err, rows) => {
         if (err) {
             res.status(400).send(err);
@@ -44,8 +41,8 @@ exports.addPost = (req, res) => {
     });
 }
 
-exports.deletePost = (req, res) => {
-    const query = 'DELETE FROM posts WHERE id = ?';
+exports.deleteBoard = (req, res) => {
+    const query = 'DELETE FROM boards WHERE id = ?';
 
     connection.query(query, [req.body.id], (err, rows) => {
         if (err) {
@@ -57,12 +54,11 @@ exports.deletePost = (req, res) => {
     });
 }
 
-exports.editPost = (req, res) => {
-    const query = 'UPDATE posts SET content = ?, topic = ? WHERE id = ?';
+exports.editBoard = (req, res) => {
+    const query = 'UPDATE boards SET name = ? WHERE id = ?';
 
     connection.query(query, [
-        req.body.content,
-        req.body.topic,
+        req.body.name,
         req.body.id
     ], (err, rows) => {
         if (err) {
