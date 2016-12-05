@@ -31,7 +31,7 @@
             return deferred.promise;
         }
 
-        function getBoardPosts(id) {
+        function getBoardData(id) {
             let deferred = $q.defer();
 
             $http.get('/api/board/' + id)
@@ -44,9 +44,23 @@
             return deferred.promise;
         }
 
+        function getBoardPosts(id) {
+            let deferred = $q.defer();
+
+            $http.get('/api/board/' + id + '/posts')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             subscribe: subscribe,
             unsubscribe: unsubscribe,
+            getBoardData: getBoardData,
             getBoardPosts: getBoardPosts
         };
     }

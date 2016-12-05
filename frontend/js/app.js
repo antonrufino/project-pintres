@@ -19,7 +19,7 @@
             templateUrl: 'views/topic.html',
             controller: 'TopicCtrl'
         })
-        .when('/board/:id/:name', {
+        .when('/board/:id', {
             templateUrl: 'views/board.html',
             controller: 'BoardCtrl'
         });

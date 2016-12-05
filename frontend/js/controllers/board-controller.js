@@ -6,6 +6,7 @@
     function boardController($scope, $routeParams, UserService, PostService,
         BoardService) {
         $scope.user = {};
+        $scope.board = {};
         $scope.posts = [];
         $scope.board_name = $routeParams.name;
 
@@ -22,6 +23,14 @@
             })
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
+
+        BoardService.getBoardData($routeParams.id)
+        .then((res) => {
+            $scope.board = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot load posts.', 3000);
             console.log(err);
         });
 

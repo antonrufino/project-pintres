@@ -1,13 +1,13 @@
 const connection = require(__dirname + '/../db');
 
-exports.searchBoard = (req, res) => {
+exports.getBoardData = (req, res) => {
     const query = 'SELECT * FROM boards WHERE id = ?;'
     connection.query(query, [req.params.id], (err, rows) => {
         if (err) {
             res.status(400).send(err);
             console.log(err);
         } else {
-            res.send(rows);
+            res.send(rows[0]);
         }
     });
 }

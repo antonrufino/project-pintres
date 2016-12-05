@@ -24,8 +24,8 @@ module.exports = (router) => {
     router.post('/api/post/edit', postController.editPost);
 
     router.post('/api/board', boardController.addBoard);
-    router.get('/api/board', boardController.getAllBoards);
-    router.get('/api/board/:id', boardController.getBoardPosts);
+    router.get('/api/board/:id', boardController.getBoardData);
+    router.get('/api/board/:id/posts', boardController.getBoardPosts);
     router.post('/api/board/remove', boardController.deleteBoard);
     router.post('/api/board/edit', boardController.editBoard);
 
