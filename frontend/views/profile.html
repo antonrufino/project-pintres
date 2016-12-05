@@ -17,7 +17,8 @@
             <!-- Posts Tab Content -->
             <ul class="collection">
                 <a class="collection-item red-text text-darken-2"
-                    ng-repeat="board in boardsByUser">
+                    ng-repeat="board in boardsByUser"
+                    ng-href="#/board/{{board.board_id}}">
                     {{board.board_name}}
                 </a>
             </ul>
@@ -27,7 +28,8 @@
             </div>
             <ul class="collection">
                 <a class="collection-item red-text text-darken-2"
-                    ng-repeat="board in subscribedBoards">
+                    ng-repeat="board in subscribedBoards"
+                    ng-href="#/board/{{board.board_id}}">
                     {{board.board_name}} by {{board.board_creator}}
                 </a>
             </ul>
