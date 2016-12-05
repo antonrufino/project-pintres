@@ -34,6 +34,20 @@ main {
     padding: 20px;
 }
 
-.topic-chip {
-    color: white;
+input[type=text]:focus {
+    border-bottom: 1px solid #f44336  !important;
+    box-shadow: 0 1px 0 0 #d32f2f !important;
+}
+
+.input-field input[type=text]:focus + label {
+    color: #f44336 !important;
+}
+
+.materialize-textarea:focus {
+    border-bottom: 1px solid #f44336  !important;
+    box-shadow: 0 1px 0 0 #d32f2f !important;
+}
+
+.materialize-textarea:focus + label {
+    color: #f44336 !important;
 }
