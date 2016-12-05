@@ -36,6 +36,7 @@
 
         UserService.getSubscribedBoards($scope.user.username)
         .then((res) => {
+            console.log(res.data);
             $scope.subscribedBoards = res.data;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);

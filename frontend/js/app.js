@@ -23,7 +23,7 @@
             templateUrl: 'views/board.html',
             controller: 'BoardCtrl'
         })
-        .when('/search/:keyword', {
+        .when('/search', {
             templateUrl: 'views/search.html',
             controller: 'SearchCtrl'
         });
