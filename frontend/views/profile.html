@@ -9,11 +9,19 @@
 
     <div class="row">
         <div class="col s12">
-
+            
             <!-- Boards Tab Content -->
             <div id="board">
-                <h3>Boards by {{user.username}}</h3>
+                <div class="row container">
+                    <h4>Boards by {{user.username}}</h4>
+                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+              
+            
+                </div>
+                
             </div>
+            
+            
             <!-- Posts Tab Content -->
             <ul class="collection">
                 <a class="collection-item red-text text-darken-2"
@@ -21,11 +29,18 @@
                     ng-href="#/board/{{board.board_id}}">
                     <span class="badge">{{board.num_posts}} posts</span>
                     {{board.board_name}}
+                        
+                    
+                
                 </a>
+                
+                
+                
+                
             </ul>
 
             <div id="topics">
-                <h3>Boards followed by {{user.username}}</h3>
+                <h4>Boards followed by {{user.username}}</h4>
             </div>
             <ul class="collection">
                 <a class="collection-item red-text text-darken-2"
@@ -34,11 +49,12 @@
                     <span class="badge">{{board.num_posts}} posts</span>
                     {{board.board_name}} by {{board.board_creator}}
                 </a>
+              
             </ul>
 
             <!-- Topics Tab Content -->
             <div id="topics">
-                <h3>Topics</h3>
+                <h4>Topics</h4>
             </div>
             <ul class="collection">
                 <a class="collection-item red-text text-darken-2"
@@ -50,7 +66,7 @@
             </ul>
 
             <div id="topics">
-                <h3>Posts</h3>
+                <h4>Posts</h4>
             </div>
             <pin-posts-container></pin-posts-container>
         </div>
@@ -60,44 +76,3 @@
 
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"> </script>
-<script>
-    $(document).ready(function(){
-        // show profile's drop down menu
-        $(".dropdown-button").dropdown();
-
-        // show the side navigation bar once the corresponding icon was clicked
-        $(".button-collapse").sideNav();
-
-        // shows the default tab (Boards) then goes to top of page
-        document.getElementById("defaultOpen").click();
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-    });
-</script>
-<script>
-    // Switches tab content corresponding to the clicked tab link
-    function SwitchTab(evt, tabname) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the link that opened the tab
-        document.getElementById(tabname).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // Clears search field when "X" is clicked
-    function ClearField() {
-        document.getElementById("search").value = "";
-    }
-</script>

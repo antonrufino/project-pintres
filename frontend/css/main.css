@@ -8,10 +8,13 @@
 
 html, body, main {
     height: 100%;
+    color: #333333;
+    
 }
 
 .side-nav-header {
     height: 120px;
+
 }
 
 .side-nav-header h3 {
