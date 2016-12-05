@@ -4,8 +4,10 @@
         'TopicService', 'FeedService', postController]);
 
     function postController($scope, UserService, PostService, TopicService) {
-        $scope.setPending = (value) => {
-            this.pending = value;
+        $scope.setPending = (post) => {
+            this.pending = post.id;
+            $scope.content = post.content;
+            $scope.topic = post.topic;
         }
 
         $scope.createPost = () => {
