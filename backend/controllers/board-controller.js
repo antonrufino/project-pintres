@@ -69,3 +69,23 @@ exports.editBoard = (req, res) => {
         }
     });
 }
+
+exports.getBoardPosts = (req, res) => {
+    const query = `
+        SELECT posts.id, author_username, content, topic, post_time FROM posts
+        JOIN board_post ON
+            board_post.post_id = posts.id
+        WHERE board_post.board_id = ?;
+    `;
+
+    connection.query(query, [
+        req.params.id
+    ], (err, rows) => {
+        if (err) {
+            res.status(400).send(err);
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
+}

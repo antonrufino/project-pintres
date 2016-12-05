@@ -18,6 +18,10 @@
         .when('/topic/:topic', {
             templateUrl: 'views/topic.html',
             controller: 'TopicCtrl'
+        })
+        .when('/board/:id/:name', {
+            templateUrl: 'views/board.html',
+            controller: 'BoardCtrl'
         });
     };
 })();

@@ -7,7 +7,7 @@
         TopicService) {
         $scope.user = {};
         $scope.posts = [];
-        $scope.topic = $routeParams.topic;
+        $scope.board_name = $routeParams.name;
 
         UserService.getCurrentUserData()
         .then((res) => {
