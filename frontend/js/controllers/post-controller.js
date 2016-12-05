@@ -21,7 +21,7 @@
                 post.author_username = $scope.user.username;
                 post.post_time = res.data.insertDate;
 
-                $scope.posts.push(post);
+                $scope.posts.unshift(post);
             }, (err) => {
                 Materialize.toast('Oops! Something went wrong.', 3000);
                 console.log(err);

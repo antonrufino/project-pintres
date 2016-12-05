@@ -26,6 +26,11 @@
         .when('/search', {
             templateUrl: 'views/search.html',
             controller: 'SearchCtrl'
+        })
+        .otherwise({
+            redirectTo: () => {
+                window.location.href="/not-found";
+            }
         });
     };
 })();
