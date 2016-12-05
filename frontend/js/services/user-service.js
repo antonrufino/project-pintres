@@ -10,7 +10,7 @@
             .then((res) => {
                 deferred.resolve(res);
             }, (err) => {
-                deffered.reject(err);
+                deferred.reject(err);
             });
 
             return deferred.promise;
