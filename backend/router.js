@@ -6,6 +6,7 @@ const topicController = require(__dirname + '/controllers/topic-controller');
 const boardController = require(__dirname + '/controllers/board-controller');
 const boardPostController = require(__dirname + '/controllers/boardpost-controller');
 const boardUserController = require(__dirname + '/controllers/boarduser-controller');
+const searchController = require(__dirname + '/controllers/search-controller');
 
 module.exports = (router) => {
     router.post('/api/login', authController.login);
@@ -43,9 +44,14 @@ module.exports = (router) => {
     router.post('/api/topic/:topic/unsubscribe', topicController.unsubscribe);
     router.get('/api/topic/:topic', topicController.getTopicPosts);
 
-    router.get('/login', routeController.login)
+    router.get('/api/search/user', searchController.searchUser);
+    router.get('/api/search/board', searchController.searchBoard);
+    router.get('/api/search/topic', searchController.searchTopic);
+
+    router.get('/login', routeController.login);
     router.get('/main', routeController.main);
-    router.get('/not-found', routeController.notFound)
+    router.get('/not-found', routeController.notFound);
+
     router.all('*', (req, res) => {
         res.status(404).redirect('/not-found');
     });

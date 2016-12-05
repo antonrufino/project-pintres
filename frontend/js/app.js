@@ -22,6 +22,10 @@
         .when('/board/:id', {
             templateUrl: 'views/board.html',
             controller: 'BoardCtrl'
+        })
+        .when('/search/:keyword', {
+            templateUrl: 'views/search.html',
+            controller: 'SearchCtrl'
         });
     };
 })();
