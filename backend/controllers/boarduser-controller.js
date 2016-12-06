@@ -28,7 +28,7 @@ exports.addBoardUser = (req, res) => {
     const query = 'INSERT INTO board_user(board_id, username) VALUES(?, ?);'
 
     connection.query(query, [
-	    req.body.board_id,
+	    req.params.id,
         req.session.user.username,
     ], (err, rows) => {
         if (err) {
@@ -41,9 +41,28 @@ exports.addBoardUser = (req, res) => {
 }
 
 exports.deleteBoardUser = (req, res) => {
-    const query = 'DELETE FROM board_user WHERE board_id = ?';
+    const query = 'DELETE FROM board_user WHERE board_id = ? AND username = ?';
 
-    connection.query(query, [req.body.board_id], (err, rows) => {
+    connection.query(query, [
+        req.params.id,
+        req.session.user.username
+    ], (err, rows) => {
+        if (err) {
+            res.status(400).send(err);
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
+}
+
+exports.isSubscribed = (req, res) => {
+    const query = 'SELECT * FROM board_user WHERE board_id = ? AND username = ?';
+
+    connection.query(query, [
+        req.params.id,
+        req.session.user.username
+    ], (err, rows) => {
         if (err) {
             res.status(400).send(err);
             console.log(err);

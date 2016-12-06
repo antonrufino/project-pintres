@@ -1,31 +1,31 @@
 <nav class="white fixed">
     <div class="nav-wrapper">
         <div class="row container">
-                 
+
             <span class="brand-logo center red-text text-darken-2">
                 {{board.name}} by {{board.creator}}
-                        
+
             </span>
-            
+
             <div class="card-action">
                 <a href="" data-target=""
                     class="red-text text-darken-2"
-                    ng-click="subscribeToTopic(post.topic)"
-                    ng-show="isSubscribedToTopic(post.topic)">
-               s     <i class="material-icons">favorite_border</i>
+                    ng-click="subscribe()"
+                    ng-hide="board.subscribedToBoard">
+                    <i class="material-icons">favorite_border</i>
                 </a>
                 <a href="" data-target=""
                     class="red-text text-darken-2"
-                    ng-click="unsubscribeFromTopic(post.topic)"
-                    ng-hide="isSubscribedToTopic(post.topic)">
+                    ng-click="unsubscribe()"
+                    ng-show="board.subscribedToBoard">
                     <i class="material-icons">favorite</i>
                 </a>
 
             </div>
-            
-            
+
+
         </div>
-   
+
     </div>
 </nav>
 
@@ -38,5 +38,5 @@
       <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
     </ul>
   </div>
-        
+
 <pin-posts-container></pin-posts-container>

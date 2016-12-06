@@ -60,7 +60,7 @@
         return {
             createPost: createPost,
             deletePost: deletePost,
-            editPost: editPost
+            editPost: editPost,
             getPostBoards, getPostBoards
         };
     }

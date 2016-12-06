@@ -8,7 +8,7 @@
         $scope.user = {};
         $scope.board = {};
         $scope.posts = [];
-        $scope.board_name = $routeParams.name;
+        $scope.board.subscribedToBoard = false;
 
         UserService.getCurrentUserData()
         .then((res) => {
@@ -41,5 +41,35 @@
             Materialize.toast('Cannot load posts.', 3000);
             console.log(err);
         });
+
+        BoardService.isSubscribed($routeParams.id)
+        .then((res) => {
+            console.log(res.data.length);
+            $scope.board.subscribedToBoard = res.data.length === 1;
+        }, (err) => {
+            Materialize.toast('Oops! Something went wrong.')
+        })
+
+        $scope.subscribe = () => {
+            BoardService.subscribe($routeParams.id)
+            .then((res) => {
+                $scope.board.subscribedToBoard = true;
+                Materialize.toast('You followed ' + $scope.board.name
+                    + ' by ' + $scope.board.creator, 3000);
+            }, (err) => {
+                Materialize.toast('Oops! Something went wrong.')
+            })
+        }
+
+        $scope.unsubscribe = () => {
+            BoardService.unsubscribe($routeParams.id)
+            .then((res) => {
+                $scope.board.subscribedToBoard = false;
+                Materialize.toast('You unfollowed ' + $scope.board.name
+                    + ' by ' + $scope.board.creator, 3000);
+            }, (err) => {
+                Materialize.toast('Oops! Something went wrong.')
+            })
+        }
     }
 })();

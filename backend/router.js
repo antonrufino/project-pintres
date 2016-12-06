@@ -33,6 +33,7 @@ module.exports = (router) => {
     router.post('/api/board/posts', boardPostController.addBoardPost);
     router.post('/api/board/posts/remove', boardPostController.deleteBoardPost);
     router.post('/api/board/:id/subscribe', boardUserController.addBoardUser);
+    router.post('/api/board/:id/subscribed', boardUserController.isSubscribed);
     router.post('/api/board/:id/unsubscribe', boardUserController.deleteBoardUser);
 
     router.post('/api/topic/:topic/subscribe', topicController.subscribe);
