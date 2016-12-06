@@ -23,22 +23,17 @@ module.exports = (router) => {
     router.post('/api/post', postController.addPost);
     router.post('/api/post/remove', postController.deletePost);
     router.post('/api/post/edit', postController.editPost);
+    router.post('/api/post/:id/boards', postController.getPostBoards);
 
     router.post('/api/board', boardController.addBoard);
     router.get('/api/board/:id', boardController.getBoardData);
     router.get('/api/board/:id/posts', boardController.getBoardPosts);
     router.post('/api/board/remove', boardController.deleteBoard);
     router.post('/api/board/edit', boardController.editBoard);
-
-    router.post('/api/boardpost', boardPostController.addBoardPost);
-    router.get('/api/boardpost', boardPostController.getAllBoardPosts);
-    router.get('/api/boardpost/:id', boardPostController.searchBoardPost);
-    router.post('/api/boardpost/remove', boardPostController.deleteBoardPost);
-
-    router.post('/api/boarduser', boardUserController.addBoardUser);
-    router.get('/api/boarduser', boardUserController.getAllBoardUsers)
-    router.get('/api/boarduser/:id', boardUserController.searchBoardUser);
-    router.post('/api/boarduser/remove', boardUserController.deleteBoardUser);
+    router.post('/api/board/posts', boardPostController.addBoardPost);
+    router.post('/api/board/posts/remove', boardPostController.deleteBoardPost);
+    router.post('/api/board/:id/subscribe', boardUserController.addBoardUser);
+    router.post('/api/board/:id/unsubscribe', boardUserController.deleteBoardUser);
 
     router.post('/api/topic/:topic/subscribe', topicController.subscribe);
     router.post('/api/topic/:topic/unsubscribe', topicController.unsubscribe);
