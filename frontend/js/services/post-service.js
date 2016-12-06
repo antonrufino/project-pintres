@@ -44,10 +44,24 @@
             return deferred.promise;
         }
 
+        function getPostBoards(id) {
+            let deferred = $q.defer();
+
+            $http.post('/api/post/' + id + '/boards')
+            .then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             createPost: createPost,
             deletePost: deletePost,
             editPost: editPost
+            getPostBoards, getPostBoards
         };
     }
 })();

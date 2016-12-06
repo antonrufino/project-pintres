@@ -73,3 +73,18 @@ exports.editPost = (req, res) => {
         }
     });
 }
+
+exports.getPostBoards = (req, res) => {
+    const query = 'CALL getPostBoards(?)';
+
+    connection.query(query, [
+        req.params.id
+    ], (err, rows) => {
+        if (err) {
+            res.status(400).send(err);
+            console.log(err);
+        } else {
+            res.send(rows[0]);
+        }
+    });
+}
