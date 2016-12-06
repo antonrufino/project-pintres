@@ -57,11 +57,39 @@
             return deferred.promise;
         }
 
+        function editPostBoards(id, boards) {
+            let deferred = $q.defer();
+
+            $http.post('/api/board/posts/remove', {
+                post_id: id
+            }).then((res) => {
+                console.log("kek")
+                for (b of boards) {
+                    $http.post('/api/board/posts', {
+                        board_id: b.board_id,
+                        post_id: id
+                    }).then((res) => {
+                        console.log(res);
+                        deferred.resolve(res);
+                    }, (err) => {
+                        console.log(err);
+                        deferred.reject(err);
+                    });
+                }
+            }, (err) => {
+                console.log(err);
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             createPost: createPost,
             deletePost: deletePost,
             editPost: editPost,
-            getPostBoards, getPostBoards
+            getPostBoards, getPostBoards,
+            editPostBoards: editPostBoards
         };
     }
 })();

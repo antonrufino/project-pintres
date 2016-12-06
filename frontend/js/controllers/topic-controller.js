@@ -8,6 +8,7 @@
         $scope.user = {};
         $scope.posts = [];
         $scope.topic = $routeParams.topic;
+        $scope.boardsByUser = [];
 
         UserService.getCurrentUserData()
         .then((res) => {
@@ -19,7 +20,15 @@
             }, (err) => {
                 Materialize.toast('Cannot connect to server.', 3000);
                 console.log(err);
-            })
+            });
+
+            UserService.getBoardsByUser(res.data.username)
+            .then((res) => {
+                $scope.boardsByUser = res.data;
+            }, (err) => {
+                Materialize.toast('Cannot connect to server.', 3000);
+                console.log(err);
+            });
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);

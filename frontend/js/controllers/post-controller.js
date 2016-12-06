@@ -4,12 +4,17 @@
         'TopicService', 'FeedService', postController]);
 
     function postController($scope, UserService, PostService, TopicService) {
+        $scope.post_boards = [];
+        $scope.kek = false;
         $scope.setPending = (post) => {
             this.pending = post.id;
             $scope.content = post.content;
             PostService.getPostBoards(post.id)
             .then((res) => {
                 $scope.post_boards = res.data;
+            }, (err) => {
+                Materialize.toast('Oops! Something went wrong.', 3000);
+                console.log(err);
             })
         }
 
@@ -115,6 +120,35 @@
                 if (t.topic === topic) return true;
             }
             return false;
+        }
+
+        $scope.postIsInBoard = (board_id) => {
+            for (board of $scope.post_boards) {
+                if (board.board_id === board_id) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        $scope.updatePostBoards = (board) => {
+            for (let i = 0; i < $scope.post_boards.length; ++i) {
+                if ($scope.post_boards[i].board_id === board.board_id) {
+                    $scope.post_boards.splice(i, 1);
+                    return;
+                }
+            }
+
+            $scope.post_boards.push(board);
+        }
+
+        $scope.editPostBoards = () => {
+            PostService.editPostBoards(this.pending, $scope.post_boards)
+            .then((res) => {
+                Materialize.toast('Changes saved.', 3000);
+            }, (err) => {
+                Materialize.toast('Oops! Something went wrong.', 3000);
+            })
         }
     }
 })();
