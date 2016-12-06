@@ -47,7 +47,8 @@
 
 
 		<!-- Desktop view right side menu -->
-		<ul class="right hide-on-med-and-down red darken-2">
+		<ul class="right hide-on-med-and-down red darken-2"
+			ng-show="currUser.username === user.username" >
 			<li>
 				<a class="dropdown-button" data-constrainwidth="false" href="#!" data-activates="dropdown1">
 				<i class="large material-icons">more_vert</i></a>
