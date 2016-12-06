@@ -111,10 +111,12 @@ END|
 
 CREATE PROCEDURE searchBoard(_name VARCHAR(20))
 BEGIN
-    SELECT boards.id AS board_id, boards.name AS board_name,
-        boards.creator AS board_creator, COUNT(board_post.post_id) AS num_posts
+    SELECT boards.id AS board_id, boards.name AS board_name, (
+        SELECT COUNT(board_post.post_id)
+        FROM board_post
+        WHERE board_id = boards.id
+    ) AS num_posts
     FROM boards
-    JOIN board_post ON boards.id = board_post.board_id
     WHERE boards.name LIKE _name
     GROUP BY board_id;
 END|

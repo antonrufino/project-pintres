@@ -5,10 +5,19 @@
 
     function profileController($scope, $routeParams, UserService, PostService,
         TopicService, BoardService) {
+        $scope.currUser = {};
         $scope.user = {username: $routeParams.username}
         $scope.posts = [];
         $scope.boardsByUser = [];
         $scope.subscribedBoards = [];
+
+        UserService.getCurrentUserData()
+        .then((res) => {
+            $scope.currUser.username = res.data.username;
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
 
         UserService.getSubscribedTopics($scope.user.username)
         .then((res) => {
@@ -36,7 +45,6 @@
 
         UserService.getSubscribedBoards($scope.user.username)
         .then((res) => {
-            console.log(res.data);
             $scope.subscribedBoards = res.data;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
@@ -47,7 +55,6 @@
             console.log($scope.board_name)
             BoardService.createBoard($scope.board_name)
             .then((res) => {
-                console.log(res.data);
                 Materialize.toast('You created ' + $scope.board_name, 3000);
 
                 UserService.getBoardsByUser($scope.user.username)

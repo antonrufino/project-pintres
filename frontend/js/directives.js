@@ -49,5 +49,17 @@
             restrict: 'E',
             templateUrl: 'views/delete-board.html'
         };
+    })
+    .directive('pinManageBoards', () => {
+        return {
+            restrict: 'E',
+            templateUrl: 'views/manage-boards.html'
+        };
+    })
+    .directive('pinEditProfile', () => {
+        return {
+            restrict: 'E',
+            templateUrl: 'views/edit-profile.html'
+        }
     });
 })();

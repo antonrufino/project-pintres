@@ -49,10 +49,10 @@
                         ng-show="user.username === post.author_username">
                         <i class="material-icons">delete</i>
                     </a>
-                    <a href="" data-target="delete-post-modal"
+                    <a href="" data-target="manage-boards-modal"
                         class="red-text text-darken-2"
                         ng-click="setPending(post)">
-           
+
                         <i class="material-icons">collections</i>
                     </a>
                 </div>
@@ -62,6 +62,7 @@
     <pin-delete-post></pin-delete-post>
     <pin-edit-post></pin-edit-post>
     <pin-new-post></pin-new-post>
+    <pin-manage-boards></pin-manage-boards>
 </div>
 <script>
     $(document).ready(() => {

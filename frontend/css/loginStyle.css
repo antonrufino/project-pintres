@@ -8,7 +8,11 @@ body {
     flex: 1 0 auto;
     padding-top: 30px;
 }
-  
+
+#signupCard {
+    margin: 5% 15% 0 15%;
+}
+
 @font-face {
     font-family: 'Pacifico';
     font-style: normal;
