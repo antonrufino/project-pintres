@@ -12,6 +12,7 @@
         $scope.setPending = (post) => {
             this.pending = post.id;
             $scope.content = post.content;
+            $scope.topic = post.topic
             PostService.getPostBoards(post.id)
             .then((res) => {
                 $scope.post_boards = res.data;
