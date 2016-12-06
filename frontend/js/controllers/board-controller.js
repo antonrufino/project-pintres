@@ -71,5 +71,19 @@
                 Materialize.toast('Oops! Something went wrong.')
             })
         }
+
+        $scope.editBoard = () => {
+            BoardService.editBoard($scope.board.id, $scope.board_name)
+            .then((res) => {
+                $scope.board.name = $scope.board_name;
+                Materialize.toast('Changes saved.', 3000);
+            }, (err) => {
+                if (err.data.code === 'ER_DUP_ENTRY') {
+                    Materialize.toast('Already have a board with the same name.', 3000);
+                } else {
+                    Materialize.toast('Oops! Something went wrong.');
+                }
+            })
+        }
     }
 })();

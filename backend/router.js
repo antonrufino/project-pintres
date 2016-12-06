@@ -27,11 +27,11 @@ module.exports = (router) => {
 
     router.post('/api/board', boardController.addBoard);
     router.get('/api/board/:id', boardController.getBoardData);
-    router.get('/api/board/:id/posts', boardController.getBoardPosts);
     router.post('/api/board/remove', boardController.deleteBoard);
     router.post('/api/board/edit', boardController.editBoard);
     router.post('/api/board/posts', boardPostController.addBoardPost);
-    router.post('/api/board/posts/remove', boardPostController.deleteBoardPost);
+    router.get('/api/board/:id/posts', boardController.getBoardPosts);
+    router.post('/api/board/:id/posts/remove', boardPostController.deleteBoardPost);
     router.post('/api/board/:id/subscribe', boardUserController.addBoardUser);
     router.post('/api/board/:id/subscribed', boardUserController.isSubscribed);
     router.post('/api/board/:id/unsubscribe', boardUserController.deleteBoardUser);

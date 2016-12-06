@@ -63,6 +63,12 @@
                     Materialize.toast('Cannot connect to server.', 3000);
                     console.log(err);
                 });
+            }, (err) => {
+                if (err.data.code === 'ER_DUP_ENTRY') {
+                    Materialize.toast('Already have a board with the same name.', 3000);
+                } else {
+                    Materialize.toast('Oops! Something went wrong.');
+                }
             })
         }
     }
