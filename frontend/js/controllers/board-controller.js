@@ -1,10 +1,10 @@
 (() => {
     angular.module('app')
-    .controller('BoardCtrl', ['$scope', '$routeParams', 'UserService',
+    .controller('BoardCtrl', ['$scope', '$routeParams', '$window', 'UserService',
         'PostService', 'BoardService', boardController]);
 
-    function boardController($scope, $routeParams, UserService, PostService,
-        BoardService) {
+    function boardController($scope, $routeParams, $window, UserService,
+        PostService, BoardService) {
         $scope.user = {};
         $scope.board = {};
         $scope.posts = [];
@@ -83,6 +83,16 @@
                 } else {
                     Materialize.toast('Oops! Something went wrong.');
                 }
+            })
+        }
+
+        $scope.deleteBoard = () => {
+            BoardService.deleteBoard($scope.board.id)
+            .then((res) => {
+                Materialize.toast('You deleted ' + $scope.board.name, 3000);
+                $window.location.href="/main#/feed"
+            }, (err) => {
+                Materialize.toast('Oops! Something went wrong.');
             })
         }
     }

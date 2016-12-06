@@ -29,19 +29,27 @@
     </div>
 </nav>
 
- <div class="fixed-action-btn vertical">
-    <a class="btn-floating btn-large red">
+ <div class="fixed-action-btn vertical"
+    ng-show="board.creator === user.username">
+    <a class="btn-floating btn-large red darken-2">
       <i class="large material-icons">menu</i>
     </a>
     <ul>
       <li>
-          <a class="btn-floating red" data-target="edit-board-modal">
-              <i class="material-icons">mode_edit</i>
+          <a class="btn-floating red darken-2"
+             data-target="edit-board-modal">
+                <i class="material-icons">mode_edit</i>
           </a>
       </li>
-      <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+      <li>
+          <a class="btn-floating red darken-2"
+             data-target="delete-board-modal">
+              <i class="material-icons">delete</i>
+          </a>
+      </li>
     </ul>
   </div>
 
 <pin-posts-container></pin-posts-container>
 <pin-edit-board></pin-edit-board>
+<pin-delete-board></pin-delete-board>

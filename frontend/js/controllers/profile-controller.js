@@ -48,7 +48,7 @@
             BoardService.createBoard($scope.board_name)
             .then((res) => {
                 console.log(res.data);
-                Materialize.toast('You created ' + $scope.board_name);
+                Materialize.toast('You created ' + $scope.board_name, 3000);
 
                 UserService.getBoardsByUser($scope.user.username)
                 .then((res) => {

@@ -43,5 +43,11 @@
             restrict: 'E',
             templateUrl: 'views/edit-board.html'
         };
+    })
+    .directive('pinDeleteBoard', () => {
+        return {
+            restrict: 'E',
+            templateUrl: 'views/delete-board.html'
+        };
     });
 })();
