@@ -35,7 +35,6 @@ exports.addBoard = (req, res) => {
             res.status(400).send(err);
             console.log(err);
         } else {
-            rows.insertDate = new Date();
             res.send(rows);
         }
     });

@@ -1,0 +1,23 @@
+<div id="new-board-modal" class="modal">
+    <div class="modal-content">
+        <h4 class="red-text text-darken-2">New Post</h4>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="board_name"
+                            ng-model="board_name" />
+                        <label for="board_name">Name</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class=" modal-action modal-close btn-flat" ng-click="createBoard()">Post</a>
+        <a class=" modal-action modal-close btn-flat">Cancel</a>
+    </div>
+</div>
+<script>
+    $('.modal').modal();
+</script>

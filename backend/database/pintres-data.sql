@@ -37,6 +37,9 @@ VALUES(1, 'Acad Rants', 'antonrufino');
 INSERT INTO boards(id, name, creator)
 VALUES(2, 'Keks', 'czesyeban');
 
+INSERT INTO boards(id, name, creator)
+VALUES(3, 'Anime Rants', 'antonrufino');
+
 -- Mock board posts
 INSERT INTO board_post(board_id, post_id)
 VALUES(1, 1);

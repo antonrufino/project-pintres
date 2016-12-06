@@ -31,5 +31,11 @@
             restrict: 'E',
             templateUrl: 'views/edit-post.html'
         };
+    })
+    .directive('pinNewBoard', () => {
+        return {
+            restrict: 'E',
+            templateUrl: 'views/new-board.html'
+        };
     });
 })();

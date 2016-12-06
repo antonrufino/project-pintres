@@ -1,10 +1,10 @@
 (() => {
     angular.module('app')
     .controller('ProfileCtrl', ['$scope', '$routeParams', 'UserService',
-        'PostService', 'TopicService', profileController]);
+        'PostService', 'TopicService', 'BoardService', profileController]);
 
     function profileController($scope, $routeParams, UserService, PostService,
-        TopicService) {
+        TopicService, BoardService) {
         $scope.user = {username: $routeParams.username}
         $scope.posts = [];
         $scope.boardsByUser = [];
@@ -42,5 +42,28 @@
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
         });
+
+        $scope.createBoard = () => {
+            console.log($scope.board_name)
+            BoardService.createBoard($scope.board_name)
+            .then((res) => {
+                console.log(res.data);
+                Materialize.toast('You created ' + $scope.board_name);
+
+                UserService.getBoardsByUser($scope.user.username)
+                .then((res) => {
+                    $scope.boardsByUser = res.data;
+                }, (err) => {
+                    Materialize.toast('Cannot connect to server.', 3000);
+                    console.log(err);
+                });
+
+                BoardService.subscribe(res.data.insertId)
+                .then((res) => {}, (err) => {
+                    Materialize.toast('Cannot connect to server.', 3000);
+                    console.log(err);
+                });
+            })
+        }
     }
 })();

@@ -68,12 +68,27 @@
             return deferred.promise;
         }
 
+        function createBoard(name) {
+            let deferred = $q.defer();
+
+            $http.post('/api/board', {
+                name: name
+            }).then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             subscribe: subscribe,
             unsubscribe: unsubscribe,
             isSubscribed: isSubscribed,
             getBoardData: getBoardData,
-            getBoardPosts: getBoardPosts
+            getBoardPosts: getBoardPosts,
+            createBoard: createBoard
         };
     }
 })();
