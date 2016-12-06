@@ -1,5 +1,9 @@
 
 <script>
+	$(document).ready(() => {
+		$('#defaultOpen').click();
+	})
+
 	// Switches tab content corresponding to the clicked tab link
 	function SwitchTab(evt, tabname) {
 		// Declare all variables
@@ -68,7 +72,7 @@
 				<div class="tab col s4">
 					<div class="card red darken-2 white-text">
 						<div class="card-action">
-							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'boards')"><h4>{{boardsByUser.length}}</h4>Boards</a>
+							<a href="" id="defaultOpen" class="tablinks white-text" onclick="SwitchTab(event,'boards')"><h4>{{boardsByUser.length}}</h4>Boards</a>
 						</div>
 					</div>
 				</div>
