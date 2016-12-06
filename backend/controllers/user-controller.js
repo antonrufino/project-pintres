@@ -65,7 +65,7 @@ exports.getPostsByUser = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    let query = 'INSERT INTO users(username, passowrd, email) VALUES(?, PASSWORD(?), ?)';
+    let query = 'INSERT INTO users(username, password, email) VALUES(?, PASSWORD(?), ?)';
 
     connection.query(query, [
         req.body.username,

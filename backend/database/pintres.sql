@@ -89,11 +89,13 @@ END|
 
 CREATE PROCEDURE getSubscribedBoards(_username VARCHAR(50))
 BEGIN
-    SELECT boards.id AS board_id, boards.name AS board_name, COUNT(board_post.post_id) AS num_posts,
-        boards.creator as board_creator
+    SELECT boards.id AS board_id, boards.name AS board_name, (
+        SELECT COUNT(board_post.post_id)
+        FROM board_post
+        WHERE board_id = boards.id
+    ) AS num_posts, boards.creator as board_creator
     FROM board_user
     JOIN boards ON board_user.board_id = boards.id
-    JOIN board_post ON board_user.board_id = board_post.board_id
     WHERE board_user.username = _username AND boards.creator != _username
     GROUP BY board_user.board_id;
 END|
