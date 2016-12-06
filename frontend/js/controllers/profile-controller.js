@@ -1,15 +1,19 @@
 (() => {
     angular.module('app')
-    .controller('ProfileCtrl', ['$scope', '$routeParams', 'UserService',
-        'PostService', 'TopicService', 'BoardService', profileController]);
+    .controller('ProfileCtrl', ['$scope', '$routeParams', '$window',
+        '$rootScope', 'UserService', 'PostService', 'TopicService',
+        'BoardService', profileController]);
 
-    function profileController($scope, $routeParams, UserService, PostService,
-        TopicService, BoardService) {
+    function profileController($scope, $routeParams, $window, $rootScope,
+        UserService, PostService, TopicService, BoardService) {
         $scope.currUser = {};
         $scope.user = {username: $routeParams.username}
         $scope.posts = [];
         $scope.boardsByUser = [];
         $scope.subscribedBoards = [];
+        $scope.username = '';
+        $scope.password = '';
+        $scope.description = '';
 
         UserService.getCurrentUserData()
         .then((res) => {
@@ -77,6 +81,22 @@
                     Materialize.toast('Oops! Something went wrong.');
                 }
             })
+        }
+
+        $scope.editUser = () => {
+            UserService.editUser($scope.user.username, $scope.username,
+                $scope.password, $scope.description)
+            .then((res) => {
+                Materialize.toast('Changes saved.', 3000);
+                $rootScope.$broadcast('change_username', $scope.username);
+                $window.location.href = '/main#/user/' + $scope.username;
+            }, (err) => {
+                if (err.data.code === 'ER_DUP_ENTRY') {
+                    Materialize.toast('Username already taken.', 3000);
+                } else {
+                    Materialize.toast('Oops! Something went wrong.', 3000);
+                }
+            });
         }
     }
 })();

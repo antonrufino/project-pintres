@@ -11,5 +11,9 @@
                 Materialize.toast('Cannot connect to server.');
             });
         };
+
+        $scope.$on('change_username', (e, username) => {
+            $scope.username = username;
+        });
     }
 })();

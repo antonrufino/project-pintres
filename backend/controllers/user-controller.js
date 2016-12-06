@@ -65,7 +65,7 @@ exports.getPostsByUser = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    let query = 'INSERT INTO users VALUES(?, PASSWORD(?), ?)';
+    let query = 'INSERT INTO users(username, passowrd, email) VALUES(?, PASSWORD(?), ?)';
 
     connection.query(query, [
         req.body.username,
@@ -81,6 +81,29 @@ exports.createUser = (req, res) => {
             }
 
             res.status(200).send({success: true});
+        }
+    });
+}
+
+exports.editUser = (req, res) => {
+    let query = `
+        UPDATE users
+        SET username = ?, password = PASSWORD(?), description = ?
+        WHERE username = ?
+    `;
+
+    connection.query(query, [
+        req.body.username,
+        req.body.password,
+        req.body.description,
+        req.params.username
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            req.session.user.username = req.body.username;
+            res.status(200).send(rows);
         }
     });
 }

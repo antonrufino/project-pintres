@@ -83,13 +83,30 @@
             return deferred.promise;
         }
 
+        function editUser(old_username, new_username, password, description) {
+            let deferred = $q.defer();
+
+            $http.post('/api/user/' + old_username + '/edit', {
+                username: new_username,
+                password: password,
+                description: description
+            }).then((res) => {
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             getCurrentUserData: getCurrentUserData,
             login: login,
             getSubscribedTopics: getSubscribedTopics,
             getSubscribedBoards: getSubscribedBoards,
             getBoardsByUser: getBoardsByUser,
-            getPostsByUser: getPostsByUser
+            getPostsByUser: getPostsByUser,
+            editUser: editUser
         };
     }
 
