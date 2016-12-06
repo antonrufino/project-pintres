@@ -14,8 +14,12 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a class=" modal-action modal-close btn-flat" ng-click="createBoard()">Save</a>
-        <a class=" modal-action modal-close btn-flat">Cancel</a>
+        <button class=" modal-action modal-close btn-flat"
+            ng-disabled="board_name.length === 0"
+            ng-click="createBoard()">
+            Save
+        </button>
+        <button class=" modal-action modal-close btn-flat">Cancel</button>
     </div>
 </div>
 <script>

@@ -6,6 +6,9 @@
     function postController($scope, UserService, PostService, TopicService) {
         $scope.post_boards = [];
         $scope.kek = false;
+        $scope.content = '';
+        $scope.topic = '';
+
         $scope.setPending = (post) => {
             this.pending = post.id;
             $scope.content = post.content;

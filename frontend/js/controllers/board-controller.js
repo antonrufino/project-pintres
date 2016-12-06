@@ -10,6 +10,7 @@
         $scope.posts = [];
         $scope.board.subscribedToBoard = false;
         $scope.boardsByUser = [];
+        $scope.board_name = '';
 
         UserService.getCurrentUserData()
         .then((res) => {

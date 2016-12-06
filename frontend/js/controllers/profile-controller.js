@@ -14,6 +14,7 @@
         $scope.username = '';
         $scope.password = '';
         $scope.description = '';
+        $scope.board_name = '';
 
         UserService.getCurrentUserData()
         .then((res) => {
