@@ -115,7 +115,7 @@ BEGIN
         SELECT COUNT(board_post.post_id)
         FROM board_post
         WHERE board_id = boards.id
-    ) AS num_posts
+    ) AS num_posts, boards.creator AS board_creator
     FROM boards
     WHERE boards.name LIKE _name
     GROUP BY board_id;
