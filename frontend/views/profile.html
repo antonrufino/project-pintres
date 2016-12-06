@@ -56,7 +56,6 @@
 		</ul>
     </div>
 </nav>
-<pin-new-board></pin-new-board>
 <div class="container profile-top">
 
     <div class="row" id="pad">
@@ -100,7 +99,7 @@
 
                     <!-- Boards Tab Content -->
                     <div id="boards" class="tabcontent">
-                        <h4>Boards by {{user.username}} <a href="" data-target="new-board-modal"><i class="material-icons red-text">add</i></a></h4>
+                        <h4>Boards by {{user.username}}</h4>
                         <ul class="collection">
                             <a class="collection-item red-text text-darken-2"
                                 ng-repeat="board in boardsByUser"
@@ -145,6 +144,6 @@
     </div>
 </div>
 <pin-edit-profile></pin-edit-profile>
-
+<pin-new-board></pin-new-board>
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"> </script>
