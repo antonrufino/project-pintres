@@ -90,6 +90,9 @@
             .then((res) => {
                 Materialize.toast('You subscribed to ' + topic, 3000);
                 $scope.user.topics.push({topic: topic});
+                if ($scope.user.username === $scope.userProfile.username) {
+                    $scope.userProfile.topics.push({topic: topic});
+                }
             }, (err) => {
                 if (err.data.code === 'ER_DUP_ENTRY') {
                     Materialize.toast('You\'re already subscribed to ' + topic,
@@ -107,6 +110,10 @@
                 for (let i = 0; i < $scope.user.topics.length; ++i) {
                     if ($scope.user.topics[i].topic === topic) {
                         $scope.user.topics.splice(i, 1);
+
+                        if ($scope.user.username === $scope.userProfile.username) {
+                            $scope.userProfile.topics.splice(i, 1);
+                        }
                     }
                 }
             }, (err) => {

@@ -90,6 +90,9 @@
                 UserService.getBoardsByUser($scope.userProfile.username)
                 .then((res) => {
                     $scope.boardsByUser = res.data;
+                    if ($scope.user.username === $scope.userProfile.username) {
+                        $scope.userProfile.boardsByUser = res.data;
+                    }
                 }, (err) => {
                     Materialize.toast('Cannot connect to server.', 3000);
                     console.log(err);
