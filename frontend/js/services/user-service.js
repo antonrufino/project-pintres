@@ -99,6 +99,20 @@
             return deferred.promise;
         }
 
+        function getUserDescription(username) {
+            let deferred = $q.defer();
+
+            $http.get('/api/user/' + username + '/description')
+            .then((res) => {
+                console.log(res.data);
+                deferred.resolve(res);
+            }, (err) => {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             getCurrentUserData: getCurrentUserData,
             login: login,
@@ -106,7 +120,8 @@
             getSubscribedBoards: getSubscribedBoards,
             getBoardsByUser: getBoardsByUser,
             getPostsByUser: getPostsByUser,
-            editUser: editUser
+            editUser: editUser,
+            getUserDescription, getUserDescription
         };
     }
 

@@ -4,6 +4,21 @@ exports.getUser = (req, res) => {
     res.send(req.session.user);
 };
 
+exports.getUserDescription = (req, res) => {
+    let query = 'SELECT description FROM users WHERE username = ?';
+
+    connection.query(query, [
+        req.params.username
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows);
+        }
+    });
+}
+
 exports.getSubscribedTopics = (req, res) => {
     let query = 'CALL getSubscribedTopics(?)';
 

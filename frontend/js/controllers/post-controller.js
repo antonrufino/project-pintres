@@ -32,6 +32,7 @@
             .then((res) => {
                 Materialize.toast('Posted!', 3000);
 
+                post.id = res.data.insertId;
                 post.author_username = $scope.user.username;
                 post.post_time = res.data.insertDate;
 

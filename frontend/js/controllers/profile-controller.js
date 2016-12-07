@@ -9,6 +9,7 @@
         $scope.user = {};
         $scope.userProfile = {username: $routeParams.username}
         $scope.posts = [];
+        $scope.userProfile.boardsByUser = [];
         $scope.boardsByUser = [];
         $scope.subscribedBoards = [];
         $scope.username = '';
@@ -27,6 +28,22 @@
                 Materialize.toast('Cannot connect to server.', 3000);
                 console.log(err);
             });
+
+            UserService.getBoardsByUser(res.data.username)
+            .then((res) => {
+                $scope.boardsByUser = res.data;
+            }, (err) => {
+                Materialize.toast('Cannot connect to server.', 3000);
+                console.log(err);
+            });
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
+
+        UserService.getUserDescription($routeParams.username)
+        .then((res) => {
+            $scope.userProfile.description = res.data[0].description;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
@@ -50,7 +67,7 @@
 
         UserService.getBoardsByUser($scope.userProfile.username)
         .then((res) => {
-            $scope.boardsByUser = res.data;
+            $scope.userProfile.boardsByUser = res.data;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
