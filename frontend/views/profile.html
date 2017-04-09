@@ -1,9 +1,22 @@
 
 <script>
+    $(document).ready(function(){
+		// show profile's drop down menu
+		$(".dropdown-button").dropdown();
+
+		// show the side navigation bar once the corresponding icon was clicked
+		$(".button-collapse").sideNav();
+
+		// shows the default tab (Boards) then goes to top of page
+		document.getElementById("defaultOpen").click();
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	});
+
 	// Switches tab content corresponding to the clicked tab link
 	function SwitchTab(evt, tabname) {
 		// Declare all variables
 		var i, tabcontent, tablinks;
+
 
 		// Get all elements with class="tabcontent" and hide them
 		tabcontent = document.getElementsByClassName("tabcontent");
@@ -27,12 +40,12 @@
 <nav class="white fixed">
     <div class="nav-wrapper">
         <span class="brand-logo center red-text text-darken-2">
-            {{user.username}}
+            {{userProfile.username}}
         </span>
         <!-- dropdown for profile option -->
 		<ul id="dropdown1"
 			class="dropdown-content"
-			ng-show="currUser.username === user.username" >
+			ng-show="user.username === userProfile.username" >
 			<li>
 				<a href="" data-target="edit-profile-modal">Edit Profile</a>
 			</li>
@@ -48,7 +61,7 @@
 
 		<!-- Desktop view right side menu -->
 		<ul class="right hide-on-med-and-down red darken-2"
-			ng-show="currUser.username === user.username" >
+			ng-show="user.username === userProfile.username" >
 			<li>
 				<a class="dropdown-button" data-constrainwidth="false" href="#!" data-activates="dropdown1">
 				<i class="large material-icons">more_vert</i></a>
@@ -56,38 +69,49 @@
 		</ul>
     </div>
 </nav>
-<pin-new-board></pin-new-board>
-<div class="container profile-top">
+<div class="container profile-top" style="padding-top: 5%">
 
+
+			<!-- User name, picture, and description -->
+			<div class="row">
+				<div class="col s12">
+					<div class="col s9">
+					<h4 class="left-align grey-text text-darken-1" style="margin-right: 10%; text-align: justify">{{userProfile.description}}</h4>
+					</div>
+					<div class="col s3">
+						<img src="../css/images/user.png" alt="" class="circle right" style="height:200px"/>
+					</div>
+				</div>
+			</div>
     <div class="row" id="pad">
         <div class="col s12">
 
             <!------------------------------------ TAB LINKS ------------------------------------->
 			<div class="row" id="tabLinks">
 
-				<!-- Board Tab Link -->
-				<div class="tab col s4">
-					<div class="card red darken-2 white-text">
-						<div class="card-action">
-							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'boards')"><h4>{{boardsByUser.length}}</h4>Boards</a>
-						</div>
-					</div>
-				</div>
-
 				<!-- Post Tab Link -->
 				<div class="tab col s4">
 					<div class="card red darken-2 white-text">
 						<div class="card-action">
-							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'posts')" ><h4>{{posts.length}}</h4>Posts</a>
+							<a href="" id="defaultOpen" class="tablinks white-text" onclick="SwitchTab(event,'posts')" ><h4>{{posts.length}}</h4>Posts</a>
 						</div>
 					</div>
 				</div>
+				<!-- Board Tab Link -->
+				<div class="tab col s4">
+					<div class="card red darken-2 white-text">
+						<div class="card-action">
+							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'boards')"><h4>{{userProfile.boardsByUser.length}}</h4>Boards</a>
+						</div>
+					</div>
+				</div>
+
 
 				<!-- Topic Tab Link -->
 				<div class="tab col s4">
 					<div class="card red darken-2 white-text">
 						<div class="card-action">
-							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'topics')"><h4>{{user.topics.length}}</h4>Topics</a>
+							<a href="" class="tablinks white-text" onclick="SwitchTab(event,'topics')"><h4>{{userProfile.topics.length}}</h4>Topics</a>
 						</div>
 					</div>
 				</div>
@@ -100,16 +124,16 @@
 
                     <!-- Boards Tab Content -->
                     <div id="boards" class="tabcontent">
-                        <h4>Boards by {{user.username}} <a href="" data-target="new-board-modal"><i class="material-icons red-text">add</i></a></h4>
+                        <h4>Boards by {{userProfile.username}}</h4>
                         <ul class="collection">
                             <a class="collection-item red-text text-darken-2"
-                                ng-repeat="board in boardsByUser"
+                                ng-repeat="board in userProfile.boardsByUser"
                                 ng-href="#/board/{{board.board_id}}">
                                 {{board.board_name}}
                             </a>
                         </ul>
 
-                        <h4>Boards followed by {{user.username}}</h4>
+                        <h4>Boards followed by {{userProfile.username}}</h4>
                         <ul class="collection">
                             <a class="collection-item red-text text-darken-2"
                                 ng-repeat="board in subscribedBoards"
@@ -130,7 +154,7 @@
                         <h4>Topics</h4>
                         <ul class="collection">
                             <a class="collection-item red-text text-darken-2"
-                                ng-repeat="topic in user.topics"
+                                ng-repeat="topic in userProfile.topics"
                                 ng-href="#/topic/{{topic.topic}}">
                                 {{topic.topic}}
                             </a>
@@ -145,6 +169,6 @@
     </div>
 </div>
 <pin-edit-profile></pin-edit-profile>
-
+<pin-new-board></pin-new-board>
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"> </script>

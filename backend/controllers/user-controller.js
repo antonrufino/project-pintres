@@ -4,6 +4,21 @@ exports.getUser = (req, res) => {
     res.send(req.session.user);
 };
 
+exports.getUserDescription = (req, res) => {
+    let query = 'SELECT description FROM users WHERE username = ?';
+
+    connection.query(query, [
+        req.params.username
+    ], (err, rows) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(rows);
+        }
+    });
+}
+
 exports.getSubscribedTopics = (req, res) => {
     let query = 'CALL getSubscribedTopics(?)';
 
@@ -65,7 +80,7 @@ exports.getPostsByUser = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    let query = 'INSERT INTO users(username, passowrd, email) VALUES(?, PASSWORD(?), ?)';
+    let query = 'INSERT INTO users(username, password, email) VALUES(?, PASSWORD(?), ?)';
 
     connection.query(query, [
         req.body.username,

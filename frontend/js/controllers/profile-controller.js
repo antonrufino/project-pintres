@@ -6,9 +6,10 @@
 
     function profileController($scope, $routeParams, $window, $rootScope,
         UserService, PostService, TopicService, BoardService) {
-        $scope.currUser = {};
-        $scope.user = {username: $routeParams.username}
+        $scope.user = {};
+        $scope.userProfile = {username: $routeParams.username}
         $scope.posts = [];
+        $scope.userProfile.boardsByUser = [];
         $scope.boardsByUser = [];
         $scope.subscribedBoards = [];
         $scope.username = '';
@@ -18,21 +19,45 @@
 
         UserService.getCurrentUserData()
         .then((res) => {
-            $scope.currUser.username = res.data.username;
+            $scope.user.username = res.data.username;
+
+            UserService.getSubscribedTopics(res.data.username)
+            .then((res) => {
+                $scope.user.topics = res.data;
+            }, (err) => {
+                Materialize.toast('Cannot connect to server.', 3000);
+                console.log(err);
+            });
+
+            UserService.getBoardsByUser(res.data.username)
+            .then((res) => {
+                $scope.boardsByUser = res.data;
+            }, (err) => {
+                Materialize.toast('Cannot connect to server.', 3000);
+                console.log(err);
+            });
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
         });
 
-        UserService.getSubscribedTopics($scope.user.username)
+        UserService.getUserDescription($routeParams.username)
         .then((res) => {
-            $scope.user.topics = res.data;
+            $scope.userProfile.description = res.data[0].description;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
         });
 
-        UserService.getPostsByUser($scope.user.username)
+        UserService.getSubscribedTopics($scope.userProfile.username)
+        .then((res) => {
+            $scope.userProfile.topics = res.data;
+        }, (err) => {
+            Materialize.toast('Cannot connect to server.', 3000);
+            console.log(err);
+        });
+
+        UserService.getPostsByUser($scope.userProfile.username)
         .then((res) => {
             $scope.posts = res.data;
         }, (err) => {
@@ -40,15 +65,15 @@
             console.log(err);
         });
 
-        UserService.getBoardsByUser($scope.user.username)
+        UserService.getBoardsByUser($scope.userProfile.username)
         .then((res) => {
-            $scope.boardsByUser = res.data;
+            $scope.userProfile.boardsByUser = res.data;
         }, (err) => {
             Materialize.toast('Cannot connect to server.', 3000);
             console.log(err);
         });
 
-        UserService.getSubscribedBoards($scope.user.username)
+        UserService.getSubscribedBoards($scope.userProfile.username)
         .then((res) => {
             $scope.subscribedBoards = res.data;
         }, (err) => {
@@ -62,9 +87,12 @@
             .then((res) => {
                 Materialize.toast('You created ' + $scope.board_name, 3000);
 
-                UserService.getBoardsByUser($scope.user.username)
+                UserService.getBoardsByUser($scope.userProfile.username)
                 .then((res) => {
                     $scope.boardsByUser = res.data;
+                    if ($scope.user.username === $scope.userProfile.username) {
+                        $scope.userProfile.boardsByUser = res.data;
+                    }
                 }, (err) => {
                     Materialize.toast('Cannot connect to server.', 3000);
                     console.log(err);
@@ -85,7 +113,7 @@
         }
 
         $scope.editUser = () => {
-            UserService.editUser($scope.user.username, $scope.username,
+            UserService.editUser($scope.userProfile.username, $scope.username,
                 $scope.password, $scope.description)
             .then((res) => {
                 Materialize.toast('Changes saved.', 3000);

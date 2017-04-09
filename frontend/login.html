@@ -4,6 +4,12 @@
 		 <!--Import Google Icon Font-->
       	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
       	<link rel="stylesheet" href="css/loginStyle.css">
+<!DOCTYPE html>
+<html ng-app="app-login">
+	<head>
+		 <!--Import Google Icon Font-->
+      	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+      	<link rel="stylesheet" href="css/loginStyle.css">
 
         <link rel="stylesheet" type="text/css" href="bower_components/materialize/dist/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="bower_components/materialize/dist/css/icon.css">
@@ -11,56 +17,126 @@
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"> </script>
 
-	         <!--Let browser know website is optimized for mobile-->
-	        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+
+        <script>
+
+			$(document).ready(() => {
+				$('#defaultOpen').click();
+			})
+
+	        // Switches tab content corresponding to the clicked tab link
+	        function SwitchTab(evt, tabname1) {
+		        // Declare all variables
+		        var i1, tabcontent1, tablinks1;
+
+		        // Get all elements with class="tabcontent" and hide them
+		        tabcontent1 = document.getElementsByClassName("tabcontent");
+		        for (i1 = 0; i1 < tabcontent1.length; i1++) {
+			        tabcontent1[i1].style.display = "none";
+		        }
+
+		        // Get all elements with class="tablinks" and remove the class "active"
+		        tablinks1 = document.getElementsByClassName("tablinks");
+		        for (i1 = 0; i1 < tablinks1.length; i1++) {
+			        tablinks1[i1].className = tablinks1[i1].className.replace(" active", "");
+		        }
+
+		        // Show the current tab, and add an "active" class to the link that opened the tab
+		        document.getElementById(tabname1).style.display = "block";
+		        evt.currentTarget.className += " active";
+	        }
+        </script>
 	</head>
 
 	<body>
-
-        <nav role="navigation" >
-            <div class="nav-wrapper red darken-2 white-text">
-              <ul class="left hide-on-med-and-down">
-                <li><h3 class="logo">Pintres</h3></li>
-              </ul>
-              <ul class="right hide-on-med-and-down" ng-controller="LoginCtrl">
-                <li>
-                    <form class = "row">
-						<input class ="col s5" type = "text" name="username" placeholder = "Enter Username" ng-model="username">
-						<input class ="col s5 offset-s1" type = "password" name="password" placeholder = "Enter Password" class = "hoverable" ng-model="password">
-                    </form>
-                </li>
-                <li><a class="waves-effect waves-dark btn white red-text text-darken-2" ng-click="login()">Login</a></li>
-              </ul>
-            </div>
-        </nav>
-
-
 	    <div class = "container main">
-			<div class = "container col s12 z-depth-4 card-panel" id = signupCard>
-		        <div class = "row center">
-		          <h5 class = "col s12 word-pintres"> Sign up to Pintres </h5>
-		        </div>
-		        <form ng-controller="LoginCtrl">
-		          <div class = "input-field col s6">
-								<input type = "text" name="username" ng-model="username" required>
-								<label for="username" class="center-align">Username</label>
-		          </div>
-		          <div class = "input-field col s12">
-		            <input type = "password" name="password" ng-model="password" required>
-								<label for="password">Password</label>
-		          </div>
-		          <div class = "input-field col s12">
-		            <input type = "email" class= "validate" name="email" ng-model="email" required>
-								<label for="email">Email</label>
-							</div>
-							<div class="input-field col s12">
-		          	<input type = "submit" name = "submit" value = "Sign Up" class = "btn waves-effect waves-light col s12 red darken-1 m2 z-depth-2" ng-click="createAccount()"><br>
-							</div>
-					 </form>
-		    </div>
+			<div class = "container col s12 z-depth-4 card-panel" id = "signupCard">
+
+			    <nav role="navigation" class="nav-wrapper red darken-2 white-text" >
+                      <ul class="left hide-on-med-and-down">
+                        <li><h3 class="logo">Pintres</h3></li>
+                      </ul>
+                </nav>
+
+
+			    <!------------------------------------ TAB LINKS ------------------------------------->
+			    <div class="row" id="tabLinks">
+
+				    <!-- Sign Up Tab Link -->
+				    <div class="tab col s6">
+					    <div class="card red darken-2 white-text">
+						    <div class="card-action">
+							    <a href="" id="defaultOpen" class="tablinks white-text" onclick="SwitchTab(event,'signup')">Sign Up</a>
+						    </div>
+					    </div>
+				    </div>
+
+				    <!-- Login Tab Link -->
+				    <div class="tab col s6">
+					    <div class="card red darken-2 white-text">
+						    <div class="card-action">
+							    <a href="" id="defaultOpen" class="tablinks white-text" onclick="SwitchTab(event,'login')" >Login</a>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <!--------------------------------- END OF TAB LINKS --------------------------------->
+
+                <!----------------------------------- TAB CONTENTS ----------------------------------->
+			    <div class="row">
+				    <div class="col s12">
+
+                        <!-- Sign Up Tab Content -->
+                        <div id="signup" class="tabcontent">
+                                <h4 class = "col s12 word-pintres"> Sign up to Pintres </h4>
+                                <ul class="collection" style="padding-bottom: 3%">
+                                <form ng-controller="LoginCtrl">
+                                    <div class = "input-field col s12">
+                                        <input type = "text" name="username" ng-model="username" required>
+                                        <label for="username" class="center-align">Username</label>
+                                    </div>
+                                    <div class = "input-field col s12">
+                                        <input type = "password" name="password" ng-model="password" required>
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class = "input-field col s12">
+                                        <input type = "email" class= "validate" name="email" ng-model="email" required>
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input type = "submit" name = "submit" value = "Sign Up" class = "btn waves-effect waves-light col s12 red darken-1 m2 z-depth-2" ng-click="createAccount()"><br>
+                                    </div>
+                                </form>
+                                </ul>
+                        </div>
+
+				        <!-- Login Tab Content -->
+                        <div id="login" class="tabcontent">
+                            <h4>Login</h4>
+
+                            <ul class=" collection hide-on-med-and-down" ng-controller="LoginCtrl" style="padding: 3%">
+                                <li>
+                                    <form class = "row">
+					                    <input class ="col s12" type = "text" name="username" placeholder = "Enter Username" ng-model="username">
+					                    <input class ="col s12" type = "password" name="password" placeholder = "Enter Password" class = "hoverable" ng-model="password">
+                                    </form>
+                                </li>
+                                <li><a class="btn waves-effect waves-light col s12 red darken-1 m2 z-depth-2" ng-click="login()">Login</a></li>
+                            </ul>
+
+
+                        </div>
+				    </div>
+			    </div>
+			    <!-------------------------------- END OF TAB CONTENTS ------------------------------->
+
+			</div>
 	    </div>
-        <footer class="page-footer red darken-2">
+
+	    <footer class="page-footer red darken-2">
 
             <div class="footer-copyright red darken-2">
                 <div class="container grey-text text-lighten-2">

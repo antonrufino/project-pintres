@@ -18,6 +18,7 @@ module.exports = (router) => {
     router.get('/api/user/:username/boards/subscribed', userController.getSubscribedBoards);
     router.get('/api/user/:username/boards', userController.getBoardsByUser)
     router.get('/api/user/:username/posts', userController.getPostsByUser);
+    router.get('/api/user/:username/description', userController.getUserDescription);
     router.post('/api/user/:username/edit', userController.editUser);
 
     router.get('/api/feed', postController.generateFeed);

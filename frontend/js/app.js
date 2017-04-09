@@ -1,8 +1,10 @@
 (() => {
     angular.module('app', ['ngRoute'])
-    .config(['$routeProvider', routes]);
+    .config(['$routeProvider', '$locationProvider', routes]);
 
-    function routes($routeProvider) {
+    function routes($routeProvider, $locationProvider) {
+        $locationProvider.hashPrefix('');
+
         $routeProvider
         .when('/', {
             redirectTo: '/feed'

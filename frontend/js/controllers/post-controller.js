@@ -12,6 +12,7 @@
         $scope.setPending = (post) => {
             this.pending = post.id;
             $scope.content = post.content;
+            $scope.topic = post.topic
             PostService.getPostBoards(post.id)
             .then((res) => {
                 $scope.post_boards = res.data;
@@ -31,6 +32,7 @@
             .then((res) => {
                 Materialize.toast('Posted!', 3000);
 
+                post.id = res.data.insertId;
                 post.author_username = $scope.user.username;
                 post.post_time = res.data.insertDate;
 
@@ -88,6 +90,9 @@
             .then((res) => {
                 Materialize.toast('You subscribed to ' + topic, 3000);
                 $scope.user.topics.push({topic: topic});
+                if ($scope.user.username === $scope.userProfile.username) {
+                    $scope.userProfile.topics.push({topic: topic});
+                }
             }, (err) => {
                 if (err.data.code === 'ER_DUP_ENTRY') {
                     Materialize.toast('You\'re already subscribed to ' + topic,
@@ -105,6 +110,10 @@
                 for (let i = 0; i < $scope.user.topics.length; ++i) {
                     if ($scope.user.topics[i].topic === topic) {
                         $scope.user.topics.splice(i, 1);
+
+                        if ($scope.user.username === $scope.userProfile.username) {
+                            $scope.userProfile.topics.splice(i, 1);
+                        }
                     }
                 }
             }, (err) => {
